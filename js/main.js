@@ -36,28 +36,29 @@ function renderDashboard() {
             const card = document.createElement('div');
             card.className = 'wishlist-card';
             
-            // Δημιουργία λίστας υλικών με checkboxes για το μάζεμα
             let materialsHTML = '<ul>';
-            weapon.materials.forEach((mat, index) => {
-                const matKey = `${weapon.id}_mat_${index}`;
-                const isGathered = userProgress.gatheredMaterials[matKey] || false;
-                materialsHTML += `
-                    <li>
-                        <label>
-                            <input type="checkbox" class="mat-checkbox" data-key="${matKey}" ${isGathered ? 'checked' : ''}>
-                            ${mat}
-                        </label>
-                    </li>`;
-            });
+            // Έλεγχος ασφαλείας: Αν υπάρχουν υλικά
+            if (weapon.materials && Array.isArray(weapon.materials)) {
+                weapon.materials.forEach((mat, index) => {
+                    const matKey = `${weapon.id}_mat_${index}`;
+                    const isGathered = userProgress.gatheredMaterials[matKey] || false;
+                    materialsHTML += `
+                        <li>
+                            <label>
+                                <input type="checkbox" class="mat-checkbox" data-key="${matKey}" ${isGathered ? 'checked' : ''}>
+                                ${mat}
+                            </label>
+                        </li>`;
+                });
+            }
             materialsHTML += '</ul>';
 
             card.innerHTML = `
-                <h3>🎯 ${weapon.name}</h3>
+                <h3>🎯 ${weapon.name || 'Άγνωστο Όπλο'}</h3>
                 <p>Υλικά που απαιτούνται:</p>
                 ${materialsHTML}
             `;
 
-            // Event listener για τα checkboxes των υλικών
             card.querySelectorAll('.mat-checkbox').forEach(chk => {
                 chk.addEventListener('change', (e) => {
                     const key = e.target.dataset.key;
@@ -69,6 +70,11 @@ function renderDashboard() {
             wishlistContainer.appendChild(card);
         }
     });
+
+    if (!hasWishlistItems) {
+        wishlistContainer.innerHTML = '<p class="empty-msg">Δεν έχεις προσθέσει κάποιο όπλο στο "Θέλω να το φτιάξω". Πήγαινε στα Όπλα και διάλεξε!</p>';
+    }
+}
 
     if (!hasWishlistItems) {
         wishlistContainer.innerHTML = '<p class="empty-msg">Δεν έχεις προσθέσει κάποιο όπλο στο "Θέλω να το φτιάξω". Πήγαινε στα Όπλα και διάλεξε!</p>';
@@ -103,20 +109,13 @@ function renderWeaponsList(categoryType) {
     document.getElementById('weapons-category-title').innerText = `Κατηγορία: ${categoryType}`;
     container.innerHTML = '';
 
-    // Debugging: Τυπώνει στην κονσόλα για να δούμε τι δεδομένα έχουμε
-    console.log("Ζητούμενη κατηγορία:", categoryType);
-    console.log("Όλα τα όπλα:", weapons);
-
-    // Φιλτράρουμε αγνοώντας τυχόν κενά ή κεφαλαία/πεζά
     const filteredWeapons = weapons.filter(w => {
         if (!w.type) return false;
         return w.type.trim().toLowerCase() === categoryType.trim().toLowerCase();
     });
 
-    console.log("Φιλτραρισμένα όπλα:", filteredWeapons);
-
     if (filteredWeapons.length === 0) {
-        container.innerHTML = `<p class="empty-msg" style="color: #ff5252;">Δεν βρέθηκαν όπλα για την κατηγορία "${categoryType}". (Άνοιξε το F12 Console για έλεγχο)</p>`;
+        container.innerHTML = `<p class="empty-msg" style="color: #ff5252;">Δεν βρέθηκαν αντικείμενα για την κατηγορία "${categoryType}".</p>`;
         return;
     }
 
@@ -127,22 +126,30 @@ function renderWeaponsList(categoryType) {
         const card = document.createElement('div');
         card.className = `item-card ${isOwned ? 'completed' : ''}`;
         
+        // Ασφαλής ανάγνωση stats
         let statsText = '';
         if (weapon.stats) {
             if (weapon.stats.damage) statsText += `Damage: ${weapon.stats.damage} | `;
             if (weapon.stats.blockReduction) statsText += `Block Reduction: ${weapon.stats.blockReduction} | `;
+            if (weapon.stats.damageMult) statsText += `Damage Mult: ${weapon.stats.damageMult} | `;
+            if (weapon.stats.chargedMult) statsText += `Charged Mult: ${weapon.stats.chargedMult} | `;
             if (weapon.stats.stun !== undefined) statsText += `Stun: ${weapon.stats.stun} | `;
-            if (weapon.stats.speed) statsText += `Speed: ${weapon.stats.speed}`;
+            if (weapon.stats.speed) statsText += `Speed: ${weapon.stats.speed} | `;
+            if (weapon.stats.fireRate) statsText += `Fire Rate: ${weapon.stats.fireRate}`;
         }
 
+        // Ασφαλής ανάγνωση materials και repairCost
+        const materialsList = (weapon.materials && Array.isArray(weapon.materials)) ? weapon.materials.join(', ') : 'N/A';
+        const repairList = (weapon.repairCost && Array.isArray(weapon.repairCost)) ? weapon.repairCost.join(', ') : 'N/A';
+
         card.innerHTML = `
-            <img src="${weapon.sprite}" alt="${weapon.name}" onerror="this.src='assets/sprites/placeholder.png'" class="item-sprite">
+            <img src="${weapon.sprite || 'assets/sprites/placeholder.png'}" alt="${weapon.name}" onerror="this.src='assets/sprites/placeholder.png'" class="item-sprite">
             <div class="item-info">
                 <h3>${weapon.name}</h3>
                 <p class="desc">${weapon.description || ''}</p>
-                <p class="stats"><strong>Stats:</strong> ${statsText}</p>
-                <p class="materials"><strong>Υλικά:</strong> ${weapon.materials ? weapon.materials.join(', ') : 'N/A'}</p>
-                <p class="repair"><strong>Repair Cost:</strong> ${weapon.repairCost ? weapon.repairCost.join(', ') : 'N/A'}</p>
+                <p class="stats"><strong>Stats:</strong> ${statsText || 'N/A'}</p>
+                <p class="materials"><strong>Υλικά:</strong> ${materialsList}</p>
+                <p class="repair"><strong>Repair Cost:</strong> ${repairList}</p>
             </div>
             <div class="actions">
                 <label><input type="checkbox" class="owned-chk" ${isOwned ? 'checked' : ''}> Το έχω</label>
