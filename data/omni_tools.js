@@ -165,5 +165,37 @@ const omniTools = [
         description: 'Μυστική αναβάθμιση Tier 3.',
         materials: ['???'],
         repairCost: ['???']
+    },
+    // --- OMNI-CLIPPER ---
+    {
+        id: 'ot_omni_clipper_1',
+        name: 'Omni-Clipper (Tier 1)',
+        type: 'Omni-Clipper',
+        sprite: 'assets/sprites/tools/omni_clipper.png',
+        stats: { tier: 1, cost: '1,000 Science points' },
+        description: 'Βασική λειτουργία κοπής. (Water Boatmen found near Skunk Pond & Bridge POIs, Wax on lilypads).',
+        materials: ['1,000 Science points', '1x Water Boatman Fin', '2x Wax'],
+        repairCost: ['1x Water Boatman Fin', '1x Wax']
+    },
+    {
+        id: 'ot_omni_clipper_2',
+        name: 'Omni-Clipper (Tier 2)',
+        type: 'Omni-Clipper',
+        sprite: 'assets/sprites/tools/omni_clipper.png',
+        stats: { tier: 2, cost: '2,000 Science points' },
+        description: 'Αναβάθμιση Clipper II. (Diving Bell Spiders in pond/bridge, Crow Feathers in Snack Bar, Picnic Table, Ice Cream Cart).',
+        materials: ['2,000 Science points', '1x Diving Bell Spider Chunk', '2x Crow Feather Pieces'],
+        repairCost: ['1x Diving Bell Spider Chunk', '1x Crow Feather Piece']
+    },
+    {
+        id: 'ot_omni_clipper_3',
+        name: 'Omni-Clipper (Tier 3)',
+        type: 'Omni-Clipper',
+        sprite: 'assets/sprites/tools/omni_clipper.png',
+        stats: { tier: 3, cost: '3,000 Science points' },
+        description: 'Προχωρημένη αναβάθμιση Clipper III.',
+        materials: ['3,000 Science points', '1x Toe Biter Claw', '2x Sunken Bone'],
+        repairCost: ['1x Toe Biter Claw', '1x Sunken Bone']
     }
+    
 ];
