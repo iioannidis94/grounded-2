@@ -1,4 +1,4 @@
-export const omniTools = [
+const omniTools = [
     {
         id: 'ot_scanner',
         name: 'Resource Scanner Upgrade',
