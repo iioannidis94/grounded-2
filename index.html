@@ -3,32 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grounded 2 - Tracker</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Grounded 2 - Database & Tracker</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
-        <h1>Grounded 2: Survival Tracker</h1>
-        <button id="resetBtn">Reset Data</button>
+        <h1>Grounded 2 Tracker</h1>
     </header>
 
     <main>
-        <section class="category">
-            <h2>🗺️ Περιοχές</h2>
-            <ul id="areas-list"></ul>
+        <section>
+            <h2>⚔️ Weapons</h2>
+            <div id="weapons-container" class="grid-container"></div>
         </section>
 
-        <section class="category">
-            <h2>⚔️ Όπλα</h2>
-            <ul id="weapons-list"></ul>
-        </section>
-
-        <section class="category">
-            <h2>🛡️ Πανοπλίες</h2>
-            <ul id="armor-list"></ul>
+        <section>
+            <h2>🛠️ Omni Tools & Upgrades</h2>
+            <div id="tools-container" class="grid-container"></div>
         </section>
     </main>
 
-    <script src="script.js"></script>
+    <!-- ΠΡΟΣΟΧΗ: Το type="module" είναι απαραίτητο -->
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>
