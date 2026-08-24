@@ -487,7 +487,7 @@ const weapons = [
     // TURRET AMMO
     // ==========================================
     { id: 'tu_splody_rounds', name: 'Splody Rounds', type: 'Turret Ammo', stats: { damage: 120, stun: 0, fireRate: '3.5 Sec' }, description: '"They explode. Nuff said."', materials: ['2 Spiky Bur', '2 Gunpowder Clump'] },
-    { id: 'tu_merica_rounds', name: "'Merica Rounds", type: 'Turret Ammo', stats: { damage: 75, stun: 0, fireRate: '2 Sec' }, description: '"Force your foes to celebrate independence from their mortal coils."', materials: ['2 Acorn Shell', '2 Gunpowder Clump'] },
+    { id: 'tu_merica_rounds', name: "'Merica Rounds", type: 'Turret Ammo', sprite: 'assets/sprites/weapons/Merica_Rounds.png', stats: { damage: 75, stun: 0, fireRate: '2 Sec' }, description: '"Force your foes to celebrate independence from their mortal coils."', materials: ['2 Acorn Shell', '2 Gunpowder Clump'] },
     { id: 'tu_pointy_rounds', name: 'Pointy Rounds', type: 'Turret Ammo', stats: { damage: 25, stun: 0, fireRate: '0.2 Sec' }, description: '"These sharp, little rounds aren\'t complicated but they get the point across."', materials: ['20 Thistle Needle', '1 Crow Feather Piece'] },
     { id: 'tu_sappy_rounds', name: 'Sappy Rounds', type: 'Turret Ammo', stats: { damage: 40, stun: 5, fireRate: '1 Sec' }, description: '"These gooey rounds are perfect for slowing down enemy crawlers..."', materials: ['5 Sap', '2 Salt Shard'] },
     { id: 'tu_burny_rounds', name: 'Burny Rounds', type: 'Turret Ammo', stats: { damage: 40, stun: 5, fireRate: '2.5 Sec' }, description: '"These hot suckers can set the ground around them ablaze."', materials: ['2 EverChar Coal Chunk', '1 Boiling Gland'] },
