@@ -27,23 +27,25 @@ function showView(viewId, categoryFilter = null) {
         renderArmorSubcategories();
     } else if (viewId === 'armor-list-view' && categoryFilter) {
         renderArmorList(categoryFilter);
-    } else if (viewId === 'map-view') {
-        // Ο χάρτης φορτώνει αυτόματα μέσω iframe
+    } else if (viewId === 'tools-subcategories-view') {
+        renderToolsSubcategories();
+    } else if (viewId === 'tools-list-view' && categoryFilter) {
+        renderToolsList(categoryFilter);
     } else if (viewId === 'dashboard-view') {
         renderDashboard();
     }
 }
 
-// 1. Dashboard: Κεντρική σελίδα & Wishlist Tracker (Ενοποιημένο για Weapons & Armors)
+// 1. Dashboard: Κεντρική σελίδα & Wishlist Tracker (Weapons, Armors, Tools)
 function renderDashboard() {
     const wishlistContainer = document.getElementById('wishlist-container');
     if (!wishlistContainer) return;
     wishlistContainer.innerHTML = '';
 
-    // Συνενώνουμε όπλα και πανοπλίες για να τα διαβάζει όλα το wishlist
     const allItems = [
         ...(typeof weapons !== 'undefined' ? weapons : []),
-        ...(typeof armor !== 'undefined' ? armor : [])
+        ...(typeof armor !== 'undefined' ? armor : []),
+        ...(typeof omniTools !== 'undefined' ? omniTools : [])
     ];
 
     if (allItems.length === 0) {
@@ -111,7 +113,7 @@ function renderDashboard() {
     });
 
     if (!hasWishlistItems) {
-        wishlistContainer.innerHTML = '<p class="empty-msg">Δεν έχεις προσθέσει κάποιο αντικείμενο στο "Θέλω να το φτιάξω". Πήγαινε στα Όπλα ή στις Πανοπλίες και διάλεξε!</p>';
+        wishlistContainer.innerHTML = '<p class="empty-msg">Δεν έχεις προσθέσει κάποιο αντικείμενο στο "Θέλω να το φτιάξω". Πήγαινε στις κατηγορίες και διάλεξε!</p>';
     }
 }
 
@@ -120,25 +122,19 @@ function renderWeaponSubcategories() {
     const container = document.getElementById('subcategories-container');
     if (!container) return;
     container.innerHTML = '';
-
     if (typeof weapons === 'undefined' || !Array.isArray(weapons)) return;
 
     const types = [...new Set(weapons.map(w => w.type).filter(Boolean))];
-
     types.forEach(type => {
         const card = document.createElement('div');
         card.className = 'category-card';
         card.innerHTML = `<h3>⚔️ ${type}</h3><p>Δες τα όπλα της κατηγορίας</p>`;
-        
-        card.addEventListener('click', () => {
-            showView('weapons-list-view', type);
-        });
-
+        card.addEventListener('click', () => showView('weapons-list-view', type));
         container.appendChild(card);
     });
 }
 
-// 3. Λίστα Όπλων Συγκεκριμένης Κατηγορίας
+// 3. Λίστα Όπλων
 function renderWeaponsList(categoryType) {
     const container = document.getElementById('weapons-items-container');
     const titleElem = document.getElementById('weapons-category-title');
@@ -146,18 +142,9 @@ function renderWeaponsList(categoryType) {
 
     titleElem.innerText = `Κατηγορία: ${categoryType}`;
     container.innerHTML = '';
-
     if (typeof weapons === 'undefined' || !Array.isArray(weapons)) return;
 
-    const filteredWeapons = weapons.filter(w => {
-        if (!w.type) return false;
-        return w.type.trim().toLowerCase() === categoryType.trim().toLowerCase();
-    });
-
-    if (filteredWeapons.length === 0) {
-        container.innerHTML = `<p class="empty-msg" style="color: #ff5252;">Δεν βρέθηκαν αντικείμενα για την κατηγορία "${categoryType}".</p>`;
-        return;
-    }
+    const filteredWeapons = weapons.filter(w => w.type && w.type.trim().toLowerCase() === categoryType.trim().toLowerCase());
 
     filteredWeapons.forEach(weapon => {
         const isWishlisted = userProgress.wishlist[weapon.id] || false;
@@ -169,16 +156,10 @@ function renderWeaponsList(categoryType) {
         let statsText = '';
         if (weapon.stats) {
             if (weapon.stats.damage) statsText += `Damage: ${weapon.stats.damage} | `;
-            if (weapon.stats.blockReduction) statsText += `Block Reduction: ${weapon.stats.blockReduction} | `;
-            if (weapon.stats.damageMult) statsText += `Damage Mult: ${weapon.stats.damageMult} | `;
-            if (weapon.stats.chargedMult) statsText += `Charged Mult: ${weapon.stats.chargedMult} | `;
+            if (weapon.stats.blockReduction) statsText += `Block: ${weapon.stats.blockReduction} | `;
             if (weapon.stats.stun !== undefined) statsText += `Stun: ${weapon.stats.stun} | `;
-            if (weapon.stats.speed) statsText += `Speed: ${weapon.stats.speed} | `;
-            if (weapon.stats.fireRate) statsText += `Fire Rate: ${weapon.stats.fireRate}`;
+            if (weapon.stats.speed) statsText += `Speed: ${weapon.stats.speed}`;
         }
-
-        const materialsList = (weapon.materials && Array.isArray(weapon.materials)) ? weapon.materials.join(', ') : 'N/A';
-        const repairList = (weapon.repairCost && Array.isArray(weapon.repairCost)) ? weapon.repairCost.join(', ') : 'N/A';
 
         card.innerHTML = `
             <img src="${weapon.sprite || 'assets/sprites/placeholder.png'}" alt="${weapon.name}" onerror="this.src='assets/sprites/placeholder.png'" class="item-sprite">
@@ -186,8 +167,8 @@ function renderWeaponsList(categoryType) {
                 <h3>${weapon.name}</h3>
                 <p class="desc">${weapon.description || ''}</p>
                 <p class="stats"><strong>Stats:</strong> ${statsText || 'N/A'}</p>
-                <p class="materials"><strong>Υλικά:</strong> ${materialsList}</p>
-                <p class="repair"><strong>Repair Cost:</strong> ${repairList}</p>
+                <p class="materials"><strong>Υλικά:</strong> ${weapon.materials ? weapon.materials.join(', ') : 'N/A'}</p>
+                <p class="repair"><strong>Repair:</strong> ${weapon.repairCost ? weapon.repairCost.join(', ') : 'N/A'}</p>
             </div>
             <div class="actions">
                 <label><input type="checkbox" class="owned-chk" ${isOwned ? 'checked' : ''}> Το έχω</label>
@@ -197,13 +178,11 @@ function renderWeaponsList(categoryType) {
 
         card.querySelector('.owned-chk').addEventListener('change', (e) => {
             userProgress.ownedItems[weapon.id] = e.target.checked;
-            if(e.target.checked) card.classList.add('completed');
-            else card.classList.remove('completed');
+            e.target.checked ? card.classList.add('completed') : card.classList.remove('completed');
             saveProgress();
         });
 
-        const wishBtn = card.querySelector('.wishlist-btn');
-        wishBtn.addEventListener('click', () => {
+        card.querySelector('.wishlist-btn').addEventListener('click', () => {
             userProgress.wishlist[weapon.id] = !isWishlisted;
             saveProgress();
             renderWeaponsList(categoryType);
@@ -214,30 +193,24 @@ function renderWeaponsList(categoryType) {
     });
 }
 
-// 4. Υποκατηγορίες Πανοπλιών (Armors)
+// 4. Υποκατηγορίες Πανοπλιών
 function renderArmorSubcategories() {
     const container = document.getElementById('armor-subcategories-container');
     if (!container) return;
     container.innerHTML = '';
-
     if (typeof armor === 'undefined' || !Array.isArray(armor)) return;
 
     const types = [...new Set(armor.map(a => a.type).filter(Boolean))];
-
     types.forEach(type => {
         const card = document.createElement('div');
         card.className = 'category-card';
         card.innerHTML = `<h3>🛡️ ${type}</h3><p>Δες τα σετ πανοπλιών</p>`;
-        
-        card.addEventListener('click', () => {
-            showView('armor-list-view', type);
-        });
-
+        card.addEventListener('click', () => showView('armor-list-view', type));
         container.appendChild(card);
     });
 }
 
-// 5. Λίστα Πανοπλιών Συγκεκριμένης Κατηγορίας
+// 5. Λίστα Πανοπλιών
 function renderArmorList(categoryType) {
     const container = document.getElementById('armor-items-container');
     const titleElem = document.getElementById('armor-category-title');
@@ -245,18 +218,9 @@ function renderArmorList(categoryType) {
 
     titleElem.innerText = `Κατηγορία: ${categoryType}`;
     container.innerHTML = '';
-
     if (typeof armor === 'undefined' || !Array.isArray(armor)) return;
 
-    const filteredArmor = armor.filter(a => {
-        if (!a.type) return false;
-        return a.type.trim().toLowerCase() === categoryType.trim().toLowerCase();
-    });
-
-    if (filteredArmor.length === 0) {
-        container.innerHTML = `<p class="empty-msg" style="color: #ff5252;">Δεν βρέθηκαν πανοπλίες για την κατηγορία "${categoryType}".</p>`;
-        return;
-    }
+    const filteredArmor = armor.filter(a => a.type && a.type.trim().toLowerCase() === categoryType.trim().toLowerCase());
 
     filteredArmor.forEach(item => {
         const isWishlisted = userProgress.wishlist[item.id] || false;
@@ -268,21 +232,16 @@ function renderArmorList(categoryType) {
         let statsText = '';
         if (item.stats) {
             if (item.stats.durability) statsText += `Durability: ${item.stats.durability} | `;
-            if (item.stats.defense) statsText += `Defense: ${item.stats.defense} | `;
-            if (item.stats.resistance) statsText += `Resistance: ${item.stats.resistance}`;
+            if (item.stats.defense) statsText += `Defense: ${item.stats.defense}`;
         }
-
-        const materialsList = (item.materials && Array.isArray(item.materials)) ? item.materials.join(', ') : 'N/A';
-        const repairList = (item.repairCost && Array.isArray(item.repairCost)) ? item.repairCost.join(', ') : 'N/A';
 
         card.innerHTML = `
             <img src="${item.sprite || 'assets/sprites/placeholder.png'}" alt="${item.name}" onerror="this.src='assets/sprites/placeholder.png'" class="item-sprite">
             <div class="item-info">
                 <h3>${item.name}</h3>
-                <p class="desc"><strong>Set Bonus:</strong> ${item.setBonus || 'N/A'} - ${item.description || ''}</p>
+                <p class="desc"><strong>Set Bonus:</strong> ${item.setBonus || 'N/A'}</p>
                 <p class="stats"><strong>Stats:</strong> ${statsText || 'N/A'}</p>
-                <p class="materials"><strong>Υλικά:</strong> ${materialsList}</p>
-                <p class="repair"><strong>Repair Cost:</strong> ${repairList}</p>
+                <p class="materials"><strong>Υλικά:</strong> ${item.materials ? item.materials.join(', ') : 'N/A'}</p>
             </div>
             <div class="actions">
                 <label><input type="checkbox" class="owned-chk" ${isOwned ? 'checked' : ''}> Το έχω</label>
@@ -292,13 +251,11 @@ function renderArmorList(categoryType) {
 
         card.querySelector('.owned-chk').addEventListener('change', (e) => {
             userProgress.ownedItems[item.id] = e.target.checked;
-            if(e.target.checked) card.classList.add('completed');
-            else card.classList.remove('completed');
+            e.target.checked ? card.classList.add('completed') : card.classList.remove('completed');
             saveProgress();
         });
 
-        const wishBtn = card.querySelector('.wishlist-btn');
-        wishBtn.addEventListener('click', () => {
+        card.querySelector('.wishlist-btn').addEventListener('click', () => {
             userProgress.wishlist[item.id] = !isWishlisted;
             saveProgress();
             renderArmorList(categoryType);
@@ -309,23 +266,86 @@ function renderArmorList(categoryType) {
     });
 }
 
+// 6. Υποκατηγορίες Omni Tools
+function renderToolsSubcategories() {
+    const container = document.getElementById('tools-subcategories-container');
+    if (!container) return;
+    container.innerHTML = '';
+    if (typeof omniTools === 'undefined' || !Array.isArray(omniTools)) return;
+
+    const types = [...new Set(omniTools.map(t => t.type).filter(Boolean))];
+    types.forEach(type => {
+        const card = document.createElement('div');
+        card.className = 'category-card';
+        card.innerHTML = `<h3>🛠️ ${type}</h3><p>Δες τα Tiers του εργαλείου</p>`;
+        card.addEventListener('click', () => showView('tools-list-view', type));
+        container.appendChild(card);
+    });
+}
+
+// 7. Λίστα Omni Tools
+function renderToolsList(categoryType) {
+    const container = document.getElementById('tools-items-container');
+    const titleElem = document.getElementById('tools-category-title');
+    if (!container || !titleElem) return;
+
+    titleElem.innerText = `Κατηγορία: ${categoryType}`;
+    container.innerHTML = '';
+    if (typeof omniTools === 'undefined' || !Array.isArray(omniTools)) return;
+
+    const filteredTools = omniTools.filter(t => t.type && t.type.trim().toLowerCase() === categoryType.trim().toLowerCase());
+
+    filteredTools.forEach(tool => {
+        const isWishlisted = userProgress.wishlist[tool.id] || false;
+        const isOwned = userProgress.ownedItems[tool.id] || false;
+
+        const card = document.createElement('div');
+        card.className = `item-card ${isOwned ? 'completed' : ''}`;
+
+        card.innerHTML = `
+            <img src="${tool.sprite || 'assets/sprites/placeholder.png'}" alt="${tool.name}" onerror="this.src='assets/sprites/placeholder.png'" class="item-sprite">
+            <div class="item-info">
+                <h3>${tool.name}</h3>
+                <p class="desc">${tool.description || ''}</p>
+                <p class="stats"><strong>Κόστος Science:</strong> ${tool.stats ? tool.stats.cost : 'N/A'}</p>
+                <p class="materials"><strong>Υλικά:</strong> ${tool.materials ? tool.materials.join(', ') : 'N/A'}</p>
+            </div>
+            <div class="actions">
+                <label><input type="checkbox" class="owned-chk" ${isOwned ? 'checked' : ''}> Το έχω</label>
+                <button class="wishlist-btn ${isWishlisted ? 'active' : ''}">${isWishlisted ? '⭐ Στο Wishlist' : '➕ Θέλω να το φτιάξω'}</button>
+            </div>
+        `;
+
+        card.querySelector('.owned-chk').addEventListener('change', (e) => {
+            userProgress.ownedItems[tool.id] = e.target.checked;
+            e.target.checked ? card.classList.add('completed') : card.classList.remove('completed');
+            saveProgress();
+        });
+
+        card.querySelector('.wishlist-btn').addEventListener('click', () => {
+            userProgress.wishlist[tool.id] = !isWishlisted;
+            saveProgress();
+            renderToolsList(categoryType);
+            renderDashboard();
+        });
+
+        container.appendChild(card);
+    });
+}
+
 // Αρχικοποίηση εφαρμογής
 document.addEventListener('DOMContentLoaded', () => {
     const navWeapons = document.getElementById('nav-weapons');
-    if (navWeapons) {
-        navWeapons.addEventListener('click', () => showView('weapons-subcategories-view'));
-    }
+    if (navWeapons) navWeapons.addEventListener('click', () => showView('weapons-subcategories-view'));
 
     const navArmors = document.getElementById('nav-armors');
-    if (navArmors) {
-        navArmors.addEventListener('click', () => showView('armor-subcategories-view'));
-    }
+    if (navArmors) navArmors.addEventListener('click', () => showView('armor-subcategories-view'));
 
-    // 👉 Ο χάρτης πλέον ανοίγει από το κουμπί Areas:
+    const navTools = document.getElementById('nav-tools');
+    if (navTools) navTools.addEventListener('click', () => showView('tools-subcategories-view'));
+
     const navAreas = document.getElementById('nav-areas');
-    if (navAreas) {
-        navAreas.addEventListener('click', () => showView('map-view'));
-    }
+    if (navAreas) navAreas.addEventListener('click', () => showView('map-view'));
     
     document.querySelectorAll('.back-to-dashboard').forEach(btn => {
         btn.addEventListener('click', () => showView('dashboard-view'));
