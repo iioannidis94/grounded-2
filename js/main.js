@@ -103,11 +103,20 @@ function renderWeaponsList(categoryType) {
     document.getElementById('weapons-category-title').innerText = `Κατηγορία: ${categoryType}`;
     container.innerHTML = '';
 
-    // Φιλτράρουμε τα όπλα ανάλογα με τον τύπο τους
-    const filteredWeapons = weapons.filter(w => w.type === categoryType);
+    // Debugging: Τυπώνει στην κονσόλα για να δούμε τι δεδομένα έχουμε
+    console.log("Ζητούμενη κατηγορία:", categoryType);
+    console.log("Όλα τα όπλα:", weapons);
+
+    // Φιλτράρουμε αγνοώντας τυχόν κενά ή κεφαλαία/πεζά
+    const filteredWeapons = weapons.filter(w => {
+        if (!w.type) return false;
+        return w.type.trim().toLowerCase() === categoryType.trim().toLowerCase();
+    });
+
+    console.log("Φιλτραρισμένα όπλα:", filteredWeapons);
 
     if (filteredWeapons.length === 0) {
-        container.innerHTML = '<p class="empty-msg">Δεν βρέθηκαν όπλα σε αυτή την κατηγορία.</p>';
+        container.innerHTML = `<p class="empty-msg" style="color: #ff5252;">Δεν βρέθηκαν όπλα για την κατηγορία "${categoryType}". (Άνοιξε το F12 Console για έλεγχο)</p>`;
         return;
     }
 
@@ -118,7 +127,6 @@ function renderWeaponsList(categoryType) {
         const card = document.createElement('div');
         card.className = `item-card ${isOwned ? 'completed' : ''}`;
         
-        // Δημιουργία κειμένου στατιστικών ανάλογα με το τι υπάρχει διαθέσιμο
         let statsText = '';
         if (weapon.stats) {
             if (weapon.stats.damage) statsText += `Damage: ${weapon.stats.damage} | `;
@@ -131,7 +139,7 @@ function renderWeaponsList(categoryType) {
             <img src="${weapon.sprite}" alt="${weapon.name}" onerror="this.src='assets/sprites/placeholder.png'" class="item-sprite">
             <div class="item-info">
                 <h3>${weapon.name}</h3>
-                <p class="desc">${weapon.description}</p>
+                <p class="desc">${weapon.description || ''}</p>
                 <p class="stats"><strong>Stats:</strong> ${statsText}</p>
                 <p class="materials"><strong>Υλικά:</strong> ${weapon.materials ? weapon.materials.join(', ') : 'N/A'}</p>
                 <p class="repair"><strong>Repair Cost:</strong> ${weapon.repairCost ? weapon.repairCost.join(', ') : 'N/A'}</p>
@@ -142,7 +150,6 @@ function renderWeaponsList(categoryType) {
             </div>
         `;
 
-        // Checkbox "Το έχω"
         card.querySelector('.owned-chk').addEventListener('change', (e) => {
             userProgress.ownedItems[weapon.id] = e.target.checked;
             if(e.target.checked) card.classList.add('completed');
@@ -150,12 +157,11 @@ function renderWeaponsList(categoryType) {
             saveProgress();
         });
 
-        // Button "Θέλω να το φτιάξω"
         const wishBtn = card.querySelector('.wishlist-btn');
         wishBtn.addEventListener('click', () => {
             userProgress.wishlist[weapon.id] = !isWishlisted;
             saveProgress();
-            renderWeaponsList(categoryType); // Refresh view
+            renderWeaponsList(categoryType);
         });
 
         container.appendChild(card);
