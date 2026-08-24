@@ -76,11 +76,6 @@ function renderDashboard() {
     }
 }
 
-    if (!hasWishlistItems) {
-        wishlistContainer.innerHTML = '<p class="empty-msg">Δεν έχεις προσθέσει κάποιο όπλο στο "Θέλω να το φτιάξω". Πήγαινε στα Όπλα και διάλεξε!</p>';
-    }
-}
-
 // 2. Υποκατηγορίες Όπλων (Cards: One-Handed, Two-Handed, Staves κλπ)
 function renderWeaponSubcategories() {
     const container = document.getElementById('subcategories-container');
@@ -94,7 +89,6 @@ function renderWeaponSubcategories() {
         card.className = 'category-card';
         card.innerHTML = `<h3>⚔️ ${type}</h3><p>Δες τα όπλα της κατηγορίας</p>`;
         
-        // Διορθωμένο event click με arrow function για ασφαλή μεταφορά του type
         card.addEventListener('click', () => {
             showView('weapons-list-view', type);
         });
@@ -177,12 +171,10 @@ function renderWeaponsList(categoryType) {
 
 // Αρχικοποίηση εφαρμογής
 document.addEventListener('DOMContentLoaded', () => {
-    // Navigation events για τις βασικές κατηγορίες της αρχικής
     document.getElementById('nav-weapons').addEventListener('click', () => showView('weapons-subcategories-view'));
     document.querySelectorAll('.back-to-dashboard').forEach(btn => {
         btn.addEventListener('click', () => showView('dashboard-view'));
     });
 
-    // Ξεκινάμε δείχνοντας το dashboard
     showView('dashboard-view');
 });
