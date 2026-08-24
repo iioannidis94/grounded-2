@@ -1,5 +1,4 @@
-
-export const weapons = [
+const weapons = [
     { 
         id: 'w_spear_2', 
         name: 'Pebblet Spear Tier II', 
