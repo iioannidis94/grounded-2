@@ -7,24 +7,10 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>">
 
-    <!-- Φόρτωση δεδομένων -->
+    <!-- 1. Φόρτωση Δεδομένων -->
     <script src="data/weapons.js" defer></script>
-    <!-- Μελλοντικά: <script src="data/armor.js" defer></script> κλπ -->
-
-    <script src="js/main.js" defer></script>
-</head><!DOCTYPE html>
-<html lang="el">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grounded 2 - Companion Tracker</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>">
-
-    <!-- Φόρτωση δεδομένων -->
-    <script src="data/weapons.js" defer></script>
-    <!-- Μελλοντικά: <script src="data/armor.js" defer></script> κλπ -->
-
+    
+    <!-- 2. Φόρτωση Κεντρικής Λογικής -->
     <script src="js/main.js" defer></script>
 </head>
 <body>
@@ -62,65 +48,14 @@
             </section>
         </div>
 
-        <!-- VIEW 2: WEAPONS SUBCATEGORIES (Επιλογή είδους όπλου) -->
+        <!-- VIEW 2: WEAPONS SUBCATEGORIES -->
         <div id="weapons-subcategories-view" class="view" style="display: none;">
             <button class="back-to-dashboard">← Πίσω στην Αρχική</button>
             <h2>⚔️ Επιλέξτε Κατηγορία Όπλων</h2>
             <div id="subcategories-container" class="grid-container"></div>
         </div>
 
-        <!-- VIEW 3: WEAPONS LIST (Λίστα όπλων με υλικά & checkboxes) -->
-        <div id="weapons-list-view" class="view" style="display: none;">
-            <button onclick="showView('weapons-subcategories-view')">← Πίσω στις Κατηγορίες</button>
-            <h2 id="weapons-category-title">Όπλα</h2>
-            <div id="weapons-items-container" class="items-list-container"></div>
-        </div>
-    </main>
-</body>
-</html>
-<body>
-    <header>
-        <h1>🌿 Grounded 2 Companion</h1>
-        <button class="back-to-dashboard" style="background: #4CAF50;">🏠 Αρχική</button>
-    </header>
-
-    <main>
-        <!-- VIEW 1: DASHBOARD (Αρχική Οθόνη) -->
-        <div id="dashboard-view" class="view">
-            <h2>📊 Κατηγορίες Tracker</h2>
-            <div class="grid-container main-categories">
-                <div id="nav-weapons" class="category-card">
-                    <h3>⚔️ Weapons</h3>
-                    <p>Όπλα, Ασπίδες, Τόξα & Staves</p>
-                </div>
-                <div class="category-card" onclick="alert('Έρχεται σύντομα!')">
-                    <h3>🛡️ Armors</h3>
-                    <p>Σετ πανοπλιών & Bonuses</p>
-                </div>
-                <div class="category-card" onclick="alert('Έρχεται σύντομα!')">
-                    <h3>🗺️ Areas</h3>
-                    <p>Biomes & Exploration</p>
-                </div>
-                <div class="category-card" onclick="alert('Έρχεται σύντομα!')">
-                    <h3>🛠️ Omni Tools</h3>
-                    <p>Upgrades & SCA.B modules</p>
-                </div>
-            </div>
-
-            <section class="wishlist-section">
-                <h2>🎯 Το "Θέλω να το φτιάξω" μου (Crafting Checklist)</h2>
-                <div id="wishlist-container" class="wishlist-grid"></div>
-            </section>
-        </div>
-
-        <!-- VIEW 2: WEAPONS SUBCATEGORIES (Επιλογή είδους όπλου) -->
-        <div id="weapons-subcategories-view" class="view" style="display: none;">
-            <button class="back-to-dashboard">← Πίσω στην Αρχική</button>
-            <h2>⚔️ Επιλέξτε Κατηγορία Όπλων</h2>
-            <div id="subcategories-container" class="grid-container"></div>
-        </div>
-
-        <!-- VIEW 3: WEAPONS LIST (Λίστα όπλων με υλικά & checkboxes) -->
+        <!-- VIEW 3: WEAPONS LIST -->
         <div id="weapons-list-view" class="view" style="display: none;">
             <button onclick="showView('weapons-subcategories-view')">← Πίσω στις Κατηγορίες</button>
             <h2 id="weapons-category-title">Όπλα</h2>
