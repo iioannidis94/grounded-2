@@ -27,6 +27,8 @@ function showView(viewId, categoryFilter = null) {
         renderArmorSubcategories();
     } else if (viewId === 'armor-list-view' && categoryFilter) {
         renderArmorList(categoryFilter);
+    } else if (viewId === 'map-view') {
+        // Ο χάρτης φορτώνει αυτόματα μέσω iframe
     } else if (viewId === 'dashboard-view') {
         renderDashboard();
     }
@@ -319,10 +321,10 @@ document.addEventListener('DOMContentLoaded', () => {
         navArmors.addEventListener('click', () => showView('armor-subcategories-view'));
     }
 
-    // 👉 ΠΡΟΣΘΕΣΕ ΑΥΤΟ ΕΔΩ ΓΙΑ ΤΟΝ ΧΑΡΤΗ:
-    const navMap = document.getElementById('nav-map');
-    if (navMap) {
-        navMap.addEventListener('click', () => showView('map-view'));
+    // 👉 Ο χάρτης πλέον ανοίγει από το κουμπί Areas:
+    const navAreas = document.getElementById('nav-areas');
+    if (navAreas) {
+        navAreas.addEventListener('click', () => showView('map-view'));
     }
     
     document.querySelectorAll('.back-to-dashboard').forEach(btn => {
