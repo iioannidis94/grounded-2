@@ -1,8 +1,8 @@
 // Δεδομένα προόδου χρήστη (localStorage)
 let userProgress = JSON.parse(localStorage.getItem('g2_progress')) || {
-    ownedItems: {},     // ID όπλου -> true (αν το έχεις βρει/φτιάξει)
-    wishlist: {},       // ID όπλου -> true (αν το έχεις βάλει στο "Θέλω να το φτιάξω")
-    gatheredMaterials: {} // 'weaponId_materialName' -> true (checkboxes για υλικά)
+    ownedItems: {},     
+    wishlist: {},       
+    gatheredMaterials: {} 
 };
 
 function saveProgress() {
@@ -27,6 +27,12 @@ function showView(viewId, categoryFilter = null) {
 function renderDashboard() {
     const wishlistContainer = document.getElementById('wishlist-container');
     wishlistContainer.innerHTML = '';
+
+    // Έλεγχος ασφαλείας: Αν τα όπλα δεν έχουν φορτωθεί ακόμα
+    if (typeof weapons === 'undefined' || !Array.isArray(weapons)) {
+        wishlistContainer.innerHTML = '<p class="empty-msg" style="color: #ff5252;">Φορτώνουν τα δεδομένα των όπλων...</p>';
+        return;
+    }
 
     let hasWishlistItems = false;
 
