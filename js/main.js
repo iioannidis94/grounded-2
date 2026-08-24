@@ -87,7 +87,12 @@ function renderWeaponSubcategories() {
         const card = document.createElement('div');
         card.className = 'category-card';
         card.innerHTML = `<h3>⚔️ ${type}</h3><p>Δες τα όπλα της κατηγορίας</p>`;
-        card.addEventListener('click', () => showView('weapons-list-view', type));
+        
+        // Διορθωμένο event click με arrow function για ασφαλή μεταφορά του type
+        card.addEventListener('click', () => {
+            showView('weapons-list-view', type);
+        });
+
         container.appendChild(card);
     });
 }
@@ -98,7 +103,13 @@ function renderWeaponsList(categoryType) {
     document.getElementById('weapons-category-title').innerText = `Κατηγορία: ${categoryType}`;
     container.innerHTML = '';
 
+    // Φιλτράρουμε τα όπλα ανάλογα με τον τύπο τους
     const filteredWeapons = weapons.filter(w => w.type === categoryType);
+
+    if (filteredWeapons.length === 0) {
+        container.innerHTML = '<p class="empty-msg">Δεν βρέθηκαν όπλα σε αυτή την κατηγορία.</p>';
+        return;
+    }
 
     filteredWeapons.forEach(weapon => {
         const isWishlisted = userProgress.wishlist[weapon.id] || false;
@@ -107,13 +118,23 @@ function renderWeaponsList(categoryType) {
         const card = document.createElement('div');
         card.className = `item-card ${isOwned ? 'completed' : ''}`;
         
+        // Δημιουργία κειμένου στατιστικών ανάλογα με το τι υπάρχει διαθέσιμο
+        let statsText = '';
+        if (weapon.stats) {
+            if (weapon.stats.damage) statsText += `Damage: ${weapon.stats.damage} | `;
+            if (weapon.stats.blockReduction) statsText += `Block Reduction: ${weapon.stats.blockReduction} | `;
+            if (weapon.stats.stun !== undefined) statsText += `Stun: ${weapon.stats.stun} | `;
+            if (weapon.stats.speed) statsText += `Speed: ${weapon.stats.speed}`;
+        }
+
         card.innerHTML = `
             <img src="${weapon.sprite}" alt="${weapon.name}" onerror="this.src='assets/sprites/placeholder.png'" class="item-sprite">
             <div class="item-info">
                 <h3>${weapon.name}</h3>
-                <p>${weapon.description}</p>
-                <p class="stats"><strong>Damage:</strong> ${weapon.stats.damage || 'N/A'} | <strong>Speed:</strong> ${weapon.stats.speed || 'N/A'}</p>
-                <p class="materials"><strong>Υλικά:</strong> ${weapon.materials.join(', ')}</p>
+                <p class="desc">${weapon.description}</p>
+                <p class="stats"><strong>Stats:</strong> ${statsText}</p>
+                <p class="materials"><strong>Υλικά:</strong> ${weapon.materials ? weapon.materials.join(', ') : 'N/A'}</p>
+                <p class="repair"><strong>Repair Cost:</strong> ${weapon.repairCost ? weapon.repairCost.join(', ') : 'N/A'}</p>
             </div>
             <div class="actions">
                 <label><input type="checkbox" class="owned-chk" ${isOwned ? 'checked' : ''}> Το έχω</label>
