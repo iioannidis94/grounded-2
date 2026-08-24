@@ -13,12 +13,13 @@ function saveProgress() {
     localStorage.setItem('g2_progress', JSON.stringify(userProgress));
 }
 
-// Router: Διαχείριση οθονών
-function showView(viewId, categoryFilter = null) {
+// Router: Διαχείριση οθονών με υποστήριξη History API & Refresh state
+function showView(viewId, categoryFilter = null, pushState = true) {
     document.querySelectorAll('.view').forEach(v => v.style.display = 'none');
     const targetView = document.getElementById(viewId);
     if (targetView) targetView.style.display = 'block';
 
+    // Φόρτωση περιεχομένου ανάλογα με το view
     if (viewId === 'weapons-subcategories-view') {
         renderWeaponSubcategories();
     } else if (viewId === 'weapons-list-view' && categoryFilter) {
@@ -34,7 +35,25 @@ function showView(viewId, categoryFilter = null) {
     } else if (viewId === 'dashboard-view') {
         renderDashboard();
     }
+
+    // Αποθήκευση της κατάστασης στο ιστορικό του browser (για το refresh και τα κουμπιά ποντικιού)
+    if (pushState) {
+        const stateObj = { viewId, categoryFilter };
+        const url = `#${viewId}${categoryFilter ? '-' + encodeURIComponent(categoryFilter) : ''}`;
+        history.pushState(stateObj, '', url);
+    }
 }
+
+
+// Ακρόαση για τα κουμπιά Μπρος / Πίσω του ποντικιού / browser
+window.addEventListener('popstate', (event) => {
+    if (event.state && event.state.viewId) {
+        showView(event.state.viewId, event.state.categoryFilter, false);
+    } else {
+        showView('dashboard-view', null, false);
+    }
+});
+
 
 // 1. Dashboard: Κεντρική σελίδα & Wishlist Tracker (Weapons, Armors, Tools)
 function renderDashboard() {
@@ -333,7 +352,7 @@ function renderToolsList(categoryType) {
     });
 }
 
-// Αρχικοποίηση εφαρμογής
+// Αρχικοποίηση εφαρμογής κατά το φόρτωση
 document.addEventListener('DOMContentLoaded', () => {
     const navWeapons = document.getElementById('nav-weapons');
     if (navWeapons) navWeapons.addEventListener('click', () => showView('weapons-subcategories-view'));
@@ -351,5 +370,25 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', () => showView('dashboard-view'));
     });
 
-    showView('dashboard-view');
+    // Έλεγχος αν υπάρχει αποθηκευμένο state στο ιστορικό κατά το refresh
+    if (history.state && history.state.viewId) {
+        showView(history.state.viewId, history.state.categoryFilter, false);
+    } else {
+        // Εναλλακτικά, έλεγχος με βάση το URL hash αν έγινε απευθείας refresh
+        const hash = window.location.hash.replace('#', '');
+        if (hash.startsWith('weapons-list-')) {
+            const cat = decodeURIComponent(hash.replace('weapons-list-', ''));
+            showView('weapons-list-view', cat, false);
+        } else if (hash.startsWith('armor-list-')) {
+            const cat = decodeURIComponent(hash.replace('armor-list-', ''));
+            showView('armor-list-view', cat, false);
+        } else if (hash.startsWith('tools-list-')) {
+            const cat = decodeURIComponent(hash.replace('tools-list-', ''));
+            showView('tools-list-view', cat, false);
+        } else if (hash && document.getElementById(hash)) {
+            showView(hash, null, false);
+        } else {
+            showView('dashboard-view', null, false);
+        }
+    }
 });
