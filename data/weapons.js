@@ -144,7 +144,7 @@ const weapons = [
         materials: ['5 Garden Snail Fragment', '2 Garden Snail Eyestalk', '3 Chrysalis Leather', '2 Silk Rope'], repairCost: ['1 Garden Snail Fragment']
     },
     { 
-        id: 'sh_black_ant_shield', name: 'Black Ant Shield', type: 'Shield', sprite: 'assets/sprites/weapons/Black_ant_Shield.png',
+        id: 'sh_black_ant_shield', name: 'Black Ant Shield', type: 'Shield', sprite: 'assets/sprites/weapons/Black_Ant_Shield.png',
         stats: { blockReduction: '82%', staminaCost: 30 },
         description: '"A sturdy shield made of black ant parts."',
         unlockedBy: 'Analyzing Black Ant Part',
@@ -179,7 +179,7 @@ const weapons = [
         materials: ['2 Raw Weevil Meat', '2 Grub Hide', '1 Crude Rope'], repairCost: ['1 Raw Weevil Meat']
     },
     { 
-        id: 'sh_crimson_buckler', name: 'Crimson Buckler', type: 'Shield', sprite: 'assets/sprites/weapons/crimson_buckler.png',
+        id: 'sh_crimson_buckler', name: 'Crimson Buckler', type: 'Shield', sprite: 'assets/sprites/weapons/Crimson_Buckler.png',
         stats: { blockReduction: '80%', staminaCost: 34 },
         description: '"A light shield made of red ant parts and lawn mite fangs."',
         unlockedBy: 'Analyzing Red Ant Part or Reaching Brainpower Level 4',
@@ -188,7 +188,7 @@ const weapons = [
     
     // STRANGER SHIELD VARIANTS
     { 
-        id: 'sh_scarlet_aegis', name: 'Scarlet Aegis', type: 'Stranger Shield', sprite: 'assets/sprites/weapons/scarlet_aegis.png',
+        id: 'sh_scarlet_aegis', name: 'Scarlet Aegis', type: 'Stranger Shield', sprite: 'assets/sprites/weapons/Scarlet_Aegis.png',
         stats: { blockReduction: '100%', staminaCost: 22 },
         description: '"A exceptionally well crafted Ladyguard. Inspires buggies to persevere."',
         unlockedBy: 'Found: In a O.R.C. Cave inbetween the podium and the large rock in the Ceremony Area.',
@@ -199,56 +199,56 @@ const weapons = [
     // TWO-HANDED
     // ==========================================
     { 
-        id: 'w_toe_biter_scythe', name: 'Toe Biter Scythe', type: 'Two-Handed', sprite: 'assets/sprites/weapons/toe_biter_scythe.png',
+        id: 'w_toe_biter_scythe', name: 'Toe Biter Scythe', type: 'Two-Handed', sprite: 'assets/sprites/weapons/Toe_Biter_Scythe.png',
         stats: { damage: '62/62/78', stun: 6, speed: 'Average', critChance: '5%' },
         description: '"Go all Grim Reaper on your foes with a scythe forged from the sharpest toe biter claws, capable of piercing the toughest shells."',
         unlockedBy: 'Analyzing Toe Biter Venom',
         materials: ['1 Toe Biter Claw', '2 Toe Biter Shell', '3 Pond Moss', '2 Cattail Fluff'], repairCost: ['1 Toe Biter Claw', '1 Pond Moss']
     },
     { 
-        id: 'w_spicy_coaltana', name: 'Spicy Coaltana', type: 'Two-Handed', sprite: 'assets/sprites/weapons/spicy_coaltana.png',
+        id: 'w_spicy_coaltana', name: 'Spicy Coaltana', type: 'Two-Handed', sprite: 'assets/sprites/weapons/Spicy_Coaltana.png',
         stats: { damage: '52/52/65', stun: 6, speed: 'Average', critChance: '5%' },
         description: '"Sear foes with a finely crafted blade, hammered out of tempered spicy globs and always-hot EverChar coal chunks."',
         unlockedBy: 'Discovering Charred Recipe',
         materials: ['2 Spicy Glob', '5 EverChar Coal Chunk', '4 Wolf Spider Chunk'], repairCost: ['2 EverChar Coal Chunk', '2 Spicy Shard']
     },
     { 
-        id: 'w_mantis_blade', name: 'Mantis Blade', type: 'Two-Handed', sprite: 'assets/sprites/weapons/mantis_blade.png',
+        id: 'w_mantis_blade', name: 'Mantis Blade', type: 'Two-Handed', sprite: 'assets/sprites/weapons/Mantis_Blade.png',
         stats: { damage: '55/55/69', stun: 6, speed: 'Average', critChance: '5%' },
         description: '"A hefty two-handed blade forged from a massive praying mantis claw."',
         unlockedBy: 'Analyzing Praying Mantis Claw',
         materials: ['2 Praying Mantis Claw', '4 Praying Mantis Chunk', '3 Lingonberry Leather'], repairCost: ['1 Praying Mantis Claw', '2 Lingonberry Leather']
     },
     { 
-        id: 'w_sour_katanga', name: 'Sour Katanga', type: 'Two-Handed', sprite: 'assets/sprites/weapons/sour_katanga.png',
+        id: 'w_sour_katanga', name: 'Sour Katanga', type: 'Two-Handed', sprite: 'assets/sprites/weapons/Sour_Katanga.png',
         stats: { damage: '54/54/68', stun: 6, speed: 'Average', critChance: '5%' },
         description: '"Pucker foes with this finely crafted tangy blade. The mysterious stranger mastered the technique of folding sour globs into a deadly katana."',
         unlockedBy: 'Analyzing Broodmother Chunk',
         materials: ['2 Sour Glob', '3 Broodmother Chunk', '3 Chrysalis Leather'], repairCost: ['4 Sour Lump']
     },
     { 
-        id: 'w_ticky_maul', name: 'Ticky Maul', type: 'Two-Handed', sprite: 'assets/sprites/weapons/ticky_maul.png',
+        id: 'w_ticky_maul', name: 'Ticky Maul', type: 'Two-Handed', sprite: 'assets/sprites/weapons/Ticky_Maul.png',
         stats: { damage: '68/68/85', stun: 9, speed: 'Slow', critChance: '2%' },
         description: '"A toothy maul covering in blood-sucking tick fangs. Drains the life force of creatures."',
         unlockedBy: 'Analyzing Tick Fang',
         materials: ['6 Tick Fang', '1 Fire Brick', '3 Spiky Bur', '4 Cattail Fluff'], repairCost: ['2 Tick Fang', '1 Cattail Fluff']
     },
     { 
-        id: 'w_prod_smacker', name: 'Prod Smacker', type: 'Two-Handed', sprite: 'assets/sprites/weapons/prod_smacker.png',
+        id: 'w_prod_smacker', name: 'Prod Smacker', type: 'Two-Handed', sprite: 'assets/sprites/weapons/Prod_Smacker.png',
         stats: { damage: '69/69/86', stun: 9, speed: 'Slow', critChance: '2%' },
         description: '"An electric prod arm from a fallen service robot given a second life as a tool for smacking enemies."',
         unlockedBy: 'Reaching Brainpower Level 12',
         materials: ['1 Volatile Capacitor', "1 Roby's Diode", "3 Roby's Scrap Parts", '1 O.R.C. Receiver'], repairCost: ["1 Roby's Scrap Parts", '1 O.R.C. Receiver']
     },
     { 
-        id: 'w_red_ant_club', name: 'Red Ant Club', type: 'Two-Handed', sprite: 'assets/sprites/weapons/red_ant_club.png',
+        id: 'w_red_ant_club', name: 'Red Ant Club', type: 'Two-Handed', sprite: 'assets/sprites/weapons/Red_Ant_Club.png',
         stats: { damage: '52/52/65', stun: 9, speed: 'Slow', critChance: '2%' },
         description: '"Meaty red ant leg perfect for beatings."',
         unlockedBy: 'Analyzing Red Ant Mandibles or Reaching Brainpower Level 4',
         materials: ['3 Red Ant Mandibles', '4 Red Ant Part', '3 Sap', '2 Crude Rope'], repairCost: ['2 Red Ant Mandibles', '1 Red Ant Part']
     },
     { 
-        id: 'w_warhammerlet', name: 'Warhammerlet', type: 'Two-Handed', sprite: 'assets/sprites/weapons/warhammerlet.png',
+        id: 'w_warhammerlet', name: 'Warhammerlet', type: 'Two-Handed', sprite: 'assets/sprites/weapons/Warhammerlet.png',
         stats: { damage: '36/36/45', stun: 9, speed: 'Slow', critChance: '1%' },
         description: '"A crude but sturdy pebblet warhammer to smash bugs into goo!"',
         unlockedBy: 'Reaching Brainpower Level 1',
@@ -257,14 +257,14 @@ const weapons = [
 
     // STRANGER TWO-HANDED VARIANTS
     { 
-        id: 'w_boom_stick', name: 'Boom Stick', type: 'Stranger Two-Handed', sprite: 'assets/sprites/weapons/boom_stick.png',
+        id: 'w_boom_stick', name: 'Boom Stick', type: 'Stranger Two-Handed', sprite: 'assets/sprites/weapons/Boom_Stick.png',
         stats: { damage: '68/68/85', stun: 9, speed: 'Slow', critChance: '2%' },
         description: '"A boosted variant of the Wallopeño, when charged it deals extra spicy damage."',
         unlockedBy: 'Found: In a large cave connected to the area where the player fixes the leaky valve in the Veggie Garden.',
         materials: ['3 Spicy Glob', '1 Blistering Boiler', '1 Hyper Beam', '3 Gunpowder Clump'], repairCost: ['4 Spicy Shard', '1 Gunpowder Clump']
     },
     { 
-        id: 'w_fellfeast', name: 'Fellfeast', type: 'Stranger Two-Handed', sprite: 'assets/sprites/weapons/fellfeast.png',
+        id: 'w_fellfeast', name: 'Fellfeast', type: 'Stranger Two-Handed', sprite: 'assets/sprites/weapons/Fellfeast.png',
         stats: { damage: '68/68/85', stun: 9, speed: 'Slow', critChance: '2%' },
         description: '"A pox on Ominent, a hex on Sloane, a feast of blood for that vile crone."',
         unlockedBy: 'Found: In a underwater cave located below the bridge in the Bridge Area.',
@@ -275,7 +275,7 @@ const weapons = [
     // DUAL WIELD
     // ==========================================
     { 
-        id: 'w_striped_slashers', name: 'Striped Slashers', type: 'Dual Wield', sprite: 'assets/sprites/weapons/striped_slashers.png',
+        id: 'w_striped_slashers', name: 'Striped Slashers', type: 'Dual Wield', sprite: 'assets/sprites/weapons/Striped_Slashers.png',
         stats: { damage: '48/48/65', stun: 5, speed: 'Fast', critChance: '5%' },
         description: '"Chitin from a striped bark scorpion shaped into a pair of bladed fists."',
         unlockedBy: 'Analyzing Striped Scorpion Pincer',
@@ -289,42 +289,42 @@ const weapons = [
         materials: ['2 Raw Woolly Aphid Meat', '4 Woolly Aphid Fuzz', '4 Mint Shard', '3 Lint'], repairCost: ['2 Woolly Aphid Fuzz', '2 Mint Shard']
     },
     { 
-        id: 'w_ice_sickles', name: 'Ice Sickles', type: 'Dual Wield', sprite: 'assets/sprites/weapons/ice_sickles.png',
+        id: 'w_ice_sickles', name: 'Ice Sickles', type: 'Dual Wield', sprite: 'assets/sprites/weapons/Ice_Sickles.png',
         stats: { damage: '36/36/49', stun: 4, speed: 'Fast', critChance: '5%' },
         description: '"Legendary frigid blades with a keen edge, forged from mint globs. Perfect for chilling out enemies."',
         unlockedBy: 'Defending The Frozen Ice Sickles In The Ice Cream Cart',
         materials: ['2 Mint Glob', '2 Northern Scorpion Pincer', '6 Northern Scorpion Chunk'], repairCost: ['2 Mint Shard']
     },
     { 
-        id: 'w_wolfsbane_fangs', name: 'Wolfsbane Fangs', type: 'Dual Wield', sprite: 'assets/sprites/weapons/wolfsbane_fangs.png',
+        id: 'w_wolfsbane_fangs', name: 'Wolfsbane Fangs', type: 'Dual Wield', sprite: 'assets/sprites/weapons/Wolfsbane_Fangs.png',
         stats: { damage: '34/34/46', stun: 3, speed: 'Fast', critChance: '6%' },
         description: '"A pair of nimble daggers made from wolf spider fangs that inflict venom."',
         unlockedBy: 'Analyzing Wolf Spider Fang',
         materials: ['2 Wolf Spider Fang', '4 Wolf Spider Chunk', '4 Spider Venom', '2 Silk Rope'], repairCost: ['1 Wolf Spider Fang', '1 Spider Venom']
     },
     { 
-        id: 'w_dusk_blades', name: 'Dusk Blades', type: 'Dual Wield', sprite: 'assets/sprites/weapons/dusk_blades.png',
+        id: 'w_dusk_blades', name: 'Dusk Blades', type: 'Dual Wield', sprite: 'assets/sprites/weapons/Dusk_Blades.png',
         stats: { damage: '35/35/47', stun: 4, speed: 'Fast', critChance: '6%' },
         description: '"A pair of earwig pincers fashioned into sickle blades."',
         unlockedBy: 'Analyzing Earwig Pincer',
         materials: ['2 Earwig Pincer', '2 Earwig Part', '2 Raw Woolly Aphid Meat', '2 Lint Rope'], repairCost: ['1 Earwig Pincer', '1 Woolly Aphid Fuzz']
     },
     { 
-        id: 'w_northern_shredders', name: 'Northern Shredders', type: 'Dual Wield', sprite: 'assets/sprites/weapons/northern_shredders.png',
+        id: 'w_northern_shredders', name: 'Northern Shredders', type: 'Dual Wield', sprite: 'assets/sprites/weapons/Northern_Shredders.png',
         stats: { damage: '32/32/43', stun: 5, speed: 'Fast', critChance: '4%' },
         description: '"Fist weapon made with the venom of northern scorpions and caterpillar."',
         unlockedBy: 'Discovering Cryptic Recipe',
         materials: ['4 Northern Scorpion Chunk', '2 Scorpion Venom', '3 Spine Nub', '2 Silk Rope'], repairCost: ['1 Northern Scorpion Chunk', '1 Spine Nub']
     },
     { 
-        id: 'w_weaver_daggers', name: 'Weaver Daggers', type: 'Dual Wield', sprite: 'assets/sprites/weapons/weaver_daggers.png',
+        id: 'w_weaver_daggers', name: 'Weaver Daggers', type: 'Dual Wield', sprite: 'assets/sprites/weapons/Weaver_Daggers.png',
         stats: { damage: '27/27/36', stun: 3, speed: 'Fast', critChance: '5%' },
         description: '"A pair of daggers made from orb weaver fangs."',
         unlockedBy: 'Analyzing Orb Weaver Fang or Reaching Brainpower Level 5',
         materials: ['2 Orb Weaver Fang', '4 Orb Weaver Chunk', '2 Silk Rope'], repairCost: ['2 Orb Weaver Fang']
     },
     { 
-        id: 'w_mitey_claws', name: 'Mitey Claws', type: 'Dual Wield', sprite: 'assets/sprites/weapons/mitey_claws.png',
+        id: 'w_mitey_claws', name: 'Mitey Claws', type: 'Dual Wield', sprite: 'assets/sprites/weapons/Mitey_Claws.png',
         stats: { damage: '22/22/28', stun: 5, speed: 'Fast', critChance: '3%' },
         description: '"The keen fangs of lawn mites fused with red ant parts into a pair of fighting claws."',
         unlockedBy: 'Analyzing Mite Fang',
@@ -333,14 +333,14 @@ const weapons = [
 
     // STRANGER DUAL WIELD VARIANTS
     { 
-        id: 'w_ice_breakers', name: 'Ice Breakers', type: 'Stranger Dual Wield', sprite: 'assets/sprites/weapons/ice_breakers.png',
+        id: 'w_ice_breakers', name: 'Ice Breakers', type: 'Stranger Dual Wield', sprite: 'assets/sprites/weapons/Ice_Breakers.png',
         stats: { damage: '40/40/54', stun: 4, speed: 'Fast', critChance: '5%' },
         description: '"This tweaked version of the Woolly Whopperss deals devestating damage to frozen creatures."',
         unlockedBy: 'Found: Inside a cave in the Greenhouse, found in the southeastern corner of the biome behind a large pot.',
         materials: ['1 Woolly Whoppers', '1 Shivering Scale', '2 Mint Glob', '2 O.R.C. Receiver'], repairCost: ['2 Woolly Aphid Fuzz', '4 Mint Shard']
     },
     { 
-        id: 'w_crimson_reapers', name: 'Crimson Reapers', type: 'Stranger Dual Wield', sprite: 'assets/sprites/weapons/crimson_reapers.png',
+        id: 'w_crimson_reapers', name: 'Crimson Reapers', type: 'Stranger Dual Wield', sprite: 'assets/sprites/weapons/Crimson_Reapers.png',
         stats: { damage: '35/35/47', stun: 4, speed: 'Fast', critChance: '5%' },
         description: '"This stranger-modified version of the classic Dusk Blades gives you health for your kills! How vampiric!"',
         unlockedBy: 'Found: Inside a pumpkin on the eastern-most side of the Pumpkin Patch...',
@@ -351,35 +351,35 @@ const weapons = [
     // BOWS & ARROWS
     // ==========================================
     { 
-        id: 'w_wolf_stringer', name: 'Wolf Stringer', type: 'Bow', sprite: 'assets/sprites/weapons/wolf_stringer.png',
+        id: 'w_wolf_stringer', name: 'Wolf Stringer', type: 'Bow', sprite: 'assets/sprites/weapons/Wolf_Stringer.png',
         stats: { damageMult: '20%', stun: 0, speed: 'Average', critChance: '5%' },
         description: '"A high quality bow made of sinewy wolf spider bow."',
         unlockedBy: 'Analyzing Spider Venom',
         materials: ['2 Wolf Spider Fang', '3 Wolf Spider Chunk', '3 Silk Rope', '2 Spider Venom'], repairCost: ['2 Silk Rope']
     },
     { 
-        id: 'w_cricket_lute_bow', name: 'Cricket Lute Bow', type: 'Bow', sprite: 'assets/sprites/weapons/cricket_lute_bow.png',
+        id: 'w_cricket_lute_bow', name: 'Cricket Lute Bow', type: 'Bow', sprite: 'assets/sprites/weapons/Cricket_Lute_Bow.png',
         stats: { damageMult: '20%', stun: 0, speed: 'Average', critChance: '4%' },
         description: '"Impress your friends with the rallying twang of this musical bow."',
         unlockedBy: 'Analyzing Cricket Drumstick or Reaching Brainpower Level 11',
         materials: ['1 Cricket Drumstick', '2 Cricket Part', '3 Lint Rope', '1 Lingonberry Leather'], repairCost: ['1 Cricket Part', '1 Lint Rope']
     },
     { 
-        id: 'w_harpoon_gun', name: 'Harpoon Gun', type: 'Bow', sprite: 'assets/sprites/weapons/harpoon_gun.png',
+        id: 'w_harpoon_gun', name: 'Harpoon Gun', type: 'Bow', sprite: 'assets/sprites/weapons/Harpoon_Gun.png',
         stats: { damageMult: '0%', stun: 0, speed: 'Slow', critChance: '3%' },
         description: '"Its unconventional firing mechanism means this ranged weapon can only be used underwater."',
         unlockedBy: 'Analyzing Raw Pond Jockey Meat or Sunken Bone',
         materials: ['1 Sunken Bone', '2 Horsetail Stem', '2 Eelgrass Strand'], repairCost: ['1 Horsetail Stem', '1 Eelgrass Strand']
     },
     { 
-        id: 'w_spider_stringer', name: 'Spider Stringer', type: 'Bow', sprite: 'assets/sprites/weapons/spider_stringer.png',
+        id: 'w_spider_stringer', name: 'Spider Stringer', type: 'Bow', sprite: 'assets/sprites/weapons/Spider_Stringer.png',
         stats: { damageMult: '10%', stun: 0, speed: 'Average', critChance: '4%' },
         description: '"A high quality bow made of sinewy orb weaver chunks."',
         unlockedBy: 'Analyzing Orb Weaver Fang',
         materials: ['2 Orb Weaver Fang', '3 Orb Weaver Chunk', '3 Silk Rope'], repairCost: ['2 Silk Rope']
     },
     { 
-        id: 'w_sprig_bow', name: 'Sprig Bow', type: 'Bow', sprite: 'assets/sprites/weapons/sprig_bow.png',
+        id: 'w_sprig_bow', name: 'Sprig Bow', type: 'Bow', sprite: 'assets/sprites/weapons/Sprig_Bow.png',
         stats: { damageMult: '0%', stun: 0, speed: 'Average', critChance: '3%' },
         description: '"Preform attacks from a long distance. Requires arrows to be useful."',
         unlockedBy: 'Analyzing Gnat Fuzz or Sprig',
@@ -388,14 +388,14 @@ const weapons = [
 
     // STRANGER BOW VARIANTS
     { 
-        id: 'w_discord', name: 'Discord', type: 'Stranger Bow', sprite: 'assets/sprites/weapons/discord.png',
+        id: 'w_discord', name: 'Discord', type: 'Stranger Bow', sprite: 'assets/sprites/weapons/Discord.png',
         stats: { damageMult: '20%', speed: 'Average', critChance: '5%' },
         description: '"A Cricket Lute Bow modified by the masked stranger to sow chaos on the battlefield."',
         unlockedBy: 'Found: On the southern side roof of the O.G.R.R. Labs.',
         materials: ['1 Cricket Lute Bow', '1 Fabulous Femur', '3 Gloom Sap', '2 O.R.C. Receiver'], repairCost: ['1 Cricket Part', '2 Gloom Sap']
     },
     { 
-        id: 'w_bushwacker', name: 'Bushwacker', type: 'Stranger Bow', sprite: 'assets/sprites/weapons/bushwacker.png',
+        id: 'w_bushwacker', name: 'Bushwacker', type: 'Stranger Bow', sprite: 'assets/sprites/weapons/Bushwacker.png',
         stats: { damageMult: '15%', speed: 'Average', critChance: '4%' },
         description: '"A modified Spider Stringer, tuned to make your first shot count."',
         unlockedBy: 'Found: In the hedge along the left side of Pine Hill...',
@@ -404,7 +404,7 @@ const weapons = [
 
     // GREATBOW
     { 
-        id: 'w_black_fang_greatbow', name: 'Black Fang Greatbow', type: 'Greatbow', sprite: 'assets/sprites/weapons/black_fang_greatbow.png',
+        id: 'w_black_fang_greatbow', name: 'Black Fang Greatbow', type: 'Greatbow', sprite: 'assets/sprites/weapons/Black_Fang_Greatbow.png',
         stats: { chargedMult: '15%', stun: 0, speed: 'Slow', critChance: '2%' },
         description: '"A massive greatbow crafted from the dreadful fangs of Axl, the fallen tarantula."',
         unlockedBy: 'Analyzing Tarantula Fang',
@@ -439,21 +439,21 @@ const weapons = [
     // CANDY STAVES
     // ==========================================
     { 
-        id: 'st_acid_ruin', name: 'Acid Ruin', type: 'Candy Staff', sprite: 'assets/sprites/weapons/acid_ruin.png',
+        id: 'st_acid_ruin', name: 'Acid Ruin', type: 'Candy Staff', sprite: 'assets/sprites/weapons/Acid_Ruin.png',
         stats: { damage: '56/56/70', stun: 1, speed: 'Slow', critChance: '3%' },
         description: '"A candy staff infused with the power of sour candy. Fires globs of tangy goo that linger and apply tang to foes."',
         unlockedBy: 'Analyzing Earwig Pincer',
         materials: ['2 Sour Glob', '2 Earwig Pincer', '4 Spiky Bur', '4 Lint Rope'], repairCost: ['4 Sour Lump']
     },
     { 
-        id: 'st_scorching_orb', name: 'Scorching Orb', type: 'Candy Staff', sprite: 'assets/sprites/weapons/scorching_orb.png',
+        id: 'st_scorching_orb', name: 'Scorching Orb', type: 'Candy Staff', sprite: 'assets/sprites/weapons/Scorching_Orb.png',
         stats: { damage: '44/44/55', stun: 1, speed: 'Slow', critChance: '3%' },
         description: '"This staff blends boiling glands with spicy candy. Launches globs of boiling goo that linger and sizzle foes."',
         unlockedBy: 'Analyzing Boiling Gland or Spicy Shard',
         materials: ['4 Spicy Shard', '3 Bombardier Part', '1 Boiling Gland'], repairCost: ['2 Spicy Shard', '1 Bombardier Part']
     },
     { 
-        id: 'st_glacial_sting', name: 'Glacial Sting', type: 'Candy Staff', sprite: 'assets/sprites/weapons/glacial_sting.png',
+        id: 'st_glacial_sting', name: 'Glacial Sting', type: 'Candy Staff', sprite: 'assets/sprites/weapons/Glacial_Sting.png',
         stats: { damage: '46/46/57', stun: 1, speed: 'Slow', critChance: '2%' },
         description: '"This staff blends a northern scorpion stinger with fresh candy. Launches globs of lingering frigid goo which chills foes."',
         unlockedBy: 'Analyzing Northern Scorpion Stinger',
@@ -462,21 +462,21 @@ const weapons = [
 
     // STRANGER STAFF VARIANTS
     { 
-        id: 'st_wither_sting', name: 'Wither Sting', type: 'Stranger Staff', sprite: 'assets/sprites/weapons/wither_sting.png',
+        id: 'st_wither_sting', name: 'Wither Sting', type: 'Stranger Staff', sprite: 'assets/sprites/weapons/Wither_Sting.png',
         stats: { damage: '56/56/70', stun: 1, speed: 'Slow', critChance: '2%' },
         description: '"A modified version of the deadly Acid Ruin. The Stranger made it extra tangy!"',
         unlockedBy: 'Found: In a cave in the Fire Pit...',
         materials: ['1 Acid Ruin', '1 Pucker Charm', '3 Key Lime Chunk', '1 Hyper Beam'], repairCost: ['4 Sour Lump', '1 Key Lime Chunk']
     },
     { 
-        id: 'st_rime_rend', name: 'Rime Rend', type: 'Stranger Staff', sprite: 'assets/sprites/weapons/rime_rend.png',
+        id: 'st_rime_rend', name: 'Rime Rend', type: 'Stranger Staff', sprite: 'assets/sprites/weapons/Rime_Rend.png',
         stats: { damage: '58/58/73', stun: 1, speed: 'Slow', critChance: '3%' },
         description: '"Topped with the most suspicious of mints, this staff will give your foes a cold snap they may never recover from."',
         unlockedBy: 'Found: In a O.R.C. Stash cave located along the western-most tip of the border...',
         materials: ['1 Glacial Sting', '1 Suspicious Mint', '2 Gold Foil'], repairCost: ['2 Mint Shard', '1 Gold Foil']
     },
     { 
-        id: 'st_heatwave', name: 'Heatwave', type: 'Stranger Staff', sprite: 'assets/sprites/weapons/heatwave.png',
+        id: 'st_heatwave', name: 'Heatwave', type: 'Stranger Staff', sprite: 'assets/sprites/weapons/Heatwave.png',
         stats: { damage: '44/44/55', stun: 1, speed: 'Slow', critChance: '4%' },
         description: '"This masterwork Scorching Orb staff packs extra heat."',
         unlockedBy: 'Found: In the bottom of the center of the Fire Pit.',
