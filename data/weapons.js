@@ -130,49 +130,49 @@ const weapons = [
     // SHIELDS
     // ==========================================
     { 
-        id: 'sh_Horned_Heater', name: 'Horned Heater', type: 'Shield', sprite: 'assets/sprites/weapons/horned_heater.png',
+        id: 'sh_horned_heater', name: 'Horned Heater', type: 'Shield', sprite: 'assets/sprites/weapons/Horned_Heater.png',
         stats: { blockReduction: '100%', staminaCost: 21 },
         description: '"A scaly heavy shield decked with lizard horns."',
         unlockedBy: 'Analyzing Lizard Horn',
         materials: ['1 Lizard Horn', '2 Ashen Leather', '2 Pinecone Piece', '2 Lint Rope'], repairCost: ['1 Lizard Scale', '1 Pinecone Piece']
     },
     { 
-        id: 'sh_Shellshocker', name: 'Shellshocker', type: 'Shield', sprite: 'assets/sprites/weapons/shellshocker.png',
+        id: 'sh_shellshocker', name: 'Shellshocker', type: 'Shield', sprite: 'assets/sprites/weapons/Shellshocker.png',
         stats: { blockReduction: '100%', staminaCost: 21 },
         description: '"A heavy shield made with garden snail fragments. Block attacks in style!"',
         unlockedBy: 'Analyzing Garden Snail Eyestalk',
         materials: ['5 Garden Snail Fragment', '2 Garden Snail Eyestalk', '3 Chrysalis Leather', '2 Silk Rope'], repairCost: ['1 Garden Snail Fragment']
     },
     { 
-        id: 'sh_Black_Ant_Shield', name: 'Black Ant Shield', type: 'Shield', sprite: 'assets/sprites/weapons/black_ant_shield.png',
+        id: 'sh_black_ant_shield', name: 'Black Ant Shield', type: 'Shield', sprite: 'assets/sprites/weapons/Black_ant_Shield.png',
         stats: { blockReduction: '82%', staminaCost: 30 },
         description: '"A sturdy shield made of black ant parts."',
         unlockedBy: 'Analyzing Black Ant Part',
         materials: ['5 Black Ant Part', '3 Chrysalis Leather', '2 Lint Rope'], repairCost: ['3 Black Ant Part']
     },
     { 
-        id: 'sh_Koi_Scale_Shield', name: 'Koi Scale Shield', type: 'Shield', sprite: 'assets/sprites/weapons/koi_scale_shield.png',
+        id: 'sh_koi_scale_shield', name: 'Koi Scale Shield', type: 'Shield', sprite: 'assets/sprites/weapons/Koi_Scale_Shield.png',
         stats: { blockReduction: '80%', staminaCost: 34 },
         description: '"A hydrodynamic shield that offers fluid underwater movement made from shiny koi fish scales."',
         unlockedBy: 'Analyzing Koi Fish Scale',
         materials: ['3 Koi Fish Scale', '2 Sunken Bone', '2 Eelgrass Strand'], repairCost: ['1 Koi Fish Scale', '1 Eelgrass Strand']
     },
     { 
-        id: 'sh_Bombuckler', name: 'Bombuckler', type: 'Shield', sprite: 'assets/sprites/weapons/bombuckler.png',
+        id: 'sh_bombuckler', name: 'Bombuckler', type: 'Shield', sprite: 'assets/sprites/weapons/Bombuckler.png',
         stats: { blockReduction: '81%', staminaCost: 30 },
         description: '"A light shield made of sizzling bombardier beetle parts."',
         unlockedBy: 'Analyzing Bombardier Part',
         materials: ['4 Bombardier Part', '2 Silk Rope', '3 Spine Nub'], repairCost: ['2 Bombardier Part']
     },
     { 
-        id: 'sh_Ladyguard', name: 'Ladyguard', type: 'Shield', sprite: 'assets/sprites/weapons/ladyguard.png',
+        id: 'sh_ladyguard', name: 'Ladyguard', type: 'Shield', sprite: 'assets/sprites/weapons/Ladyguard.png',
         stats: { blockReduction: '100%', staminaCost: 22 },
         description: '"A sturdy shield crafted from the red shell of a ladybug."',
         unlockedBy: 'Analyzing Ladybug Part or Reaching Brainpower Level 6',
         materials: ['4 Ladybug Part', '2 Crude Rope', '3 Sap'], repairCost: ['2 Ladybug Part']
     },
     { 
-        id: 'sh_Weevil_Shield', name: 'Weevil Shield', type: 'Shield', sprite: 'assets/sprites/weapons/weevil_shield.png',
+        id: 'sh_weevil_shield', name: 'Weevil Shield', type: 'Shield', sprite: 'assets/sprites/weapons/Weevil_Shield.png',
         stats: { blockReduction: '79%', staminaCost: 30 },
         description: '"Hopefully this shell will defend you better than the weevil it came from."',
         unlockedBy: 'Analyzing Raw Weevil Meat or Reaching Brainpower Level 2',
