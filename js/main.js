@@ -318,6 +318,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (navArmors) {
         navArmors.addEventListener('click', () => showView('armor-subcategories-view'));
     }
+
+    // 👉 ΠΡΟΣΘΕΣΕ ΑΥΤΟ ΕΔΩ ΓΙΑ ΤΟΝ ΧΑΡΤΗ:
+    const navMap = document.getElementById('nav-map');
+    if (navMap) {
+        navMap.addEventListener('click', () => showView('map-view'));
+    }
     
     document.querySelectorAll('.back-to-dashboard').forEach(btn => {
         btn.addEventListener('click', () => showView('dashboard-view'));
