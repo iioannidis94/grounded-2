@@ -35,7 +35,6 @@ function renderDashboard() {
     if (!wishlistContainer) return;
     wishlistContainer.innerHTML = '';
 
-    // Έλεγχος ασφαλείας: Αν δεν έχουν φορτωθεί τα όπλα ακόμα
     if (typeof weapons === 'undefined' || !Array.isArray(weapons)) {
         wishlistContainer.innerHTML = '<p class="empty-msg">Φορτώνουν τα δεδομένα...</p>';
         return;
@@ -66,17 +65,37 @@ function renderDashboard() {
             materialsHTML += '</ul>';
 
             card.innerHTML = `
-                <h3>🎯 ${weapon.name || 'Άγνωστο Όπλο'}</h3>
+                <div class="wishlist-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <h3 style="margin: 0;">🎯 ${weapon.name || 'Άγνωστο Όπλο'}</h3>
+                    <button class="remove-wishlist-btn" data-id="${weapon.id}" style="background-color: #d32f2f; padding: 4px 8px; font-size: 0.75rem;">❌ Διαγραφή</button>
+                </div>
                 <p>Υλικά που απαιτούνται:</p>
                 ${materialsHTML}
             `;
 
+            // Event listener για τα checkboxes των υλικών
             card.querySelectorAll('.mat-checkbox').forEach(chk => {
                 chk.addEventListener('change', (e) => {
                     const key = e.target.dataset.key;
                     userProgress.gatheredMaterials[key] = e.target.checked;
                     saveProgress();
                 });
+            });
+
+            // Event listener για το κουμπί διαγραφής από το Wishlist
+            card.querySelector('.remove-wishlist-btn').addEventListener('click', (e) => {
+                const weaponId = e.target.dataset.id;
+                delete userProgress.wishlist[weaponId]; // Το βγάζουμε από το wishlist
+                
+                // (Προαιρετικό) Καθαρίζουμε και τα τσεκαρισμένα υλικά αυτού του όπλου από τη μνήμη
+                Object.keys(userProgress.gatheredMaterials).forEach(key => {
+                    if (key.startsWith(`${weaponId}_mat_`)) {
+                        delete userProgress.gatheredMaterials[key];
+                    }
+                });
+
+                saveProgress();
+                renderDashboard(); // Ανανέωση της αρχικής σελίδας
             });
 
             wishlistContainer.appendChild(card);
