@@ -1,9 +1,14 @@
-// Δεδομένα προόδου χρήστη (localStorage)
-let userProgress = JSON.parse(localStorage.getItem('g2_progress')) || {
-    ownedItems: {},     
-    wishlist: {},       
-    gatheredMaterials: {} 
-};
+// Ασφαλής φόρτωση ή δημιουργία προόδου χρήστη (localStorage)
+let userProgress = JSON.parse(localStorage.getItem('g2_progress'));
+
+if (!userProgress || typeof userProgress !== 'object') {
+    userProgress = { ownedItems: {}, wishlist: {}, gatheredMaterials: {} };
+} else {
+    // Εξασφαλίζουμε ότι όλα τα υπο-αντικείμενα υπάρχουν πάντα
+    if (!userProgress.ownedItems) userProgress.ownedItems = {};
+    if (!userProgress.wishlist) userProgress.wishlist = {};
+    if (!userProgress.gatheredMaterials) userProgress.gatheredMaterials = {};
+}
 
 function saveProgress() {
     localStorage.setItem('g2_progress', JSON.stringify(userProgress));
