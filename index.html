@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grounded 2 - Database & Tracker</title>
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- Φορτώνουμε ΠΡΩΤΑ τα δεδομένα με defer -->
+    <script src="data/weapons.js" defer></script>
+    <script src="data/omni_tools.js" defer></script>
+    <!-- Μελλοντικά: <script src="data/areas.js" defer></script> -->
+    
+    <!-- Φορτώνουμε ΤΕΛΕΥΤΑΙΑ τη βασική λογική -->
+    <script src="js/main.js" defer></script>
 </head>
 <body>
     <header>
@@ -22,8 +30,5 @@
             <div id="tools-container" class="grid-container"></div>
         </section>
     </main>
-
-    <!-- ΠΡΟΣΟΧΗ: Το type="module" είναι απαραίτητο -->
-    <script type="module" src="js/main.js"></script>
 </body>
 </html>
