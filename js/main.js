@@ -12,7 +12,8 @@ function saveProgress() {
 // Router: Διαχείριση οθονών
 function showView(viewId, categoryFilter = null) {
     document.querySelectorAll('.view').forEach(v => v.style.display = 'none');
-    document.getElementById(viewId).style.display = 'block';
+    const targetView = document.getElementById(viewId);
+    if (targetView) targetView.style.display = 'block';
 
     if (viewId === 'weapons-subcategories-view') {
         renderWeaponSubcategories();
@@ -26,24 +27,24 @@ function showView(viewId, categoryFilter = null) {
 // 1. Dashboard: Κεντρική σελίδα & Wishlist Tracker
 function renderDashboard() {
     const wishlistContainer = document.getElementById('wishlist-container');
+    if (!wishlistContainer) return;
     wishlistContainer.innerHTML = '';
 
-    // Έλεγχος ασφαλείας: Αν τα όπλα δεν έχουν φορτωθεί ακόμα
+    // Έλεγχος ασφαλείας: Αν δεν έχουν φορτωθεί τα όπλα ακόμα
     if (typeof weapons === 'undefined' || !Array.isArray(weapons)) {
-        wishlistContainer.innerHTML = '<p class="empty-msg" style="color: #ff5252;">Φορτώνουν τα δεδομένα των όπλων...</p>';
+        wishlistContainer.innerHTML = '<p class="empty-msg">Φορτώνουν τα δεδομένα...</p>';
         return;
     }
 
     let hasWishlistItems = false;
 
     weapons.forEach(weapon => {
-        if (userProgress.wishlist[weapon.id]) {
+        if (userProgress.wishlist && userProgress.wishlist[weapon.id]) {
             hasWishlistItems = true;
             const card = document.createElement('div');
             card.className = 'wishlist-card';
             
             let materialsHTML = '<ul>';
-            // Έλεγχος ασφαλείας: Αν υπάρχουν υλικά
             if (weapon.materials && Array.isArray(weapon.materials)) {
                 weapon.materials.forEach((mat, index) => {
                     const matKey = `${weapon.id}_mat_${index}`;
@@ -82,13 +83,15 @@ function renderDashboard() {
     }
 }
 
-// 2. Υποκατηγορίες Όπλων (Cards: One-Handed, Two-Handed, Staves κλπ)
+// 2. Υποκατηγορίες Όπλων
 function renderWeaponSubcategories() {
     const container = document.getElementById('subcategories-container');
+    if (!container) return;
     container.innerHTML = '';
 
-    // Παίρνουμε μοναδικά types από τα όπλα
-    const types = [...new Set(weapons.map(w => w.type))];
+    if (typeof weapons === 'undefined' || !Array.isArray(weapons)) return;
+
+    const types = [...new Set(weapons.map(w => w.type).filter(Boolean))];
 
     types.forEach(type => {
         const card = document.createElement('div');
@@ -106,8 +109,13 @@ function renderWeaponSubcategories() {
 // 3. Λίστα Όπλων Συγκεκριμένης Κατηγορίας
 function renderWeaponsList(categoryType) {
     const container = document.getElementById('weapons-items-container');
-    document.getElementById('weapons-category-title').innerText = `Κατηγορία: ${categoryType}`;
+    const titleElem = document.getElementById('weapons-category-title');
+    if (!container || !titleElem) return;
+
+    titleElem.innerText = `Κατηγορία: ${categoryType}`;
     container.innerHTML = '';
+
+    if (typeof weapons === 'undefined' || !Array.isArray(weapons)) return;
 
     const filteredWeapons = weapons.filter(w => {
         if (!w.type) return false;
@@ -126,7 +134,6 @@ function renderWeaponsList(categoryType) {
         const card = document.createElement('div');
         card.className = `item-card ${isOwned ? 'completed' : ''}`;
         
-        // Ασφαλής ανάγνωση stats
         let statsText = '';
         if (weapon.stats) {
             if (weapon.stats.damage) statsText += `Damage: ${weapon.stats.damage} | `;
@@ -138,7 +145,6 @@ function renderWeaponsList(categoryType) {
             if (weapon.stats.fireRate) statsText += `Fire Rate: ${weapon.stats.fireRate}`;
         }
 
-        // Ασφαλής ανάγνωση materials και repairCost
         const materialsList = (weapon.materials && Array.isArray(weapon.materials)) ? weapon.materials.join(', ') : 'N/A';
         const repairList = (weapon.repairCost && Array.isArray(weapon.repairCost)) ? weapon.repairCost.join(', ') : 'N/A';
 
@@ -169,6 +175,7 @@ function renderWeaponsList(categoryType) {
             userProgress.wishlist[weapon.id] = !isWishlisted;
             saveProgress();
             renderWeaponsList(categoryType);
+            renderDashboard();
         });
 
         container.appendChild(card);
@@ -177,7 +184,11 @@ function renderWeaponsList(categoryType) {
 
 // Αρχικοποίηση εφαρμογής
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('nav-weapons').addEventListener('click', () => showView('weapons-subcategories-view'));
+    const navWeapons = document.getElementById('nav-weapons');
+    if (navWeapons) {
+        navWeapons.addEventListener('click', () => showView('weapons-subcategories-view'));
+    }
+    
     document.querySelectorAll('.back-to-dashboard').forEach(btn => {
         btn.addEventListener('click', () => showView('dashboard-view'));
     });
