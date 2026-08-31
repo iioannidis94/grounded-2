@@ -354,32 +354,56 @@ function renderToolsList(categoryType) {
 }
 
 // 8. Λίστα Εντόμων (ΝΕΟ)
+// 8. Λίστα Εντόμων (ΑΝΑΒΑΘΜΙΣΜΕΝΗ ΜΕ ΠΟΣΟΤΗΤΕΣ & RARE DROPS)
 function renderInsects() {
     const container = document.getElementById('insects-items-container');
     if (!container) return;
     container.innerHTML = ''; 
 
     if (typeof allGroundedInsects === 'undefined' || !Array.isArray(allGroundedInsects)) {
-        container.innerHTML = '<p class="empty-msg">Τα δεδομένα των εντόμων δεν βρέθηκαν. Σιγουρέψου ότι φορτώνεις το insects.js στο HTML σου!</p>';
+        container.innerHTML = '<p class="empty-msg">Τα δεδομένα των εντόμων δεν βρέθηκαν.</p>';
         return;
     }
 
     allGroundedInsects.forEach((insect) => {
-        // Ελέγχουμε αν το έχουμε σώσει (από το κοινό g2_progress)
         const isCompleted = userProgress.completedInsects[insect.name] || false;
-        
         const card = document.createElement('div');
         card.className = `item-card ${isCompleted ? 'completed' : ''}`;
         
-        // Χρωματίζουμε το όνομα της κατηγορίας ανάλογα με την επικινδυνότητα
-        let catColor = '#81c784'; // Default (Neutral/Harmless)
+        let catColor = '#81c784'; 
         if (insect.category === 'Hostile' || insect.category === 'O.R.C.' || insect.category === 'O.G.R.R.') catColor = '#e57373';
         if (insect.category === 'Named') catColor = '#ffb74d';
 
+        // Χτίσιμο των Standard Drops
+        let dropsHTML = '';
+        if (insect.drops && insect.drops.length > 0) {
+            dropsHTML += `<div style="margin-bottom: 5px;"><strong>Drops:</strong><br>`;
+            insect.drops.forEach(d => {
+                dropsHTML += `<span style="display: inline-block; background: #2a382f; padding: 2px 6px; border-radius: 4px; margin: 2px; font-size: 0.85rem;">${d.item} (x${d.amount})</span>`;
+            });
+            dropsHTML += `</div>`;
+        }
+
+        // Χτίσιμο των Rare Drops
+        let rareDropsHTML = '';
+        if (insect.rareDrops && insect.rareDrops.length > 0) {
+            rareDropsHTML += `<div style="margin-bottom: 5px;"><strong style="color: #ffb74d;">Rare Additional Chance:</strong><br>`;
+            insect.rareDrops.forEach(r => {
+                rareDropsHTML += `<span style="display: inline-block; background: #3e2723; padding: 2px 6px; border-radius: 4px; margin: 2px; font-size: 0.85rem; color: #ffcc80;">${r.item} (x${r.amount})</span>`;
+            });
+            rareDropsHTML += `</div>`;
+        }
+
+        // Χτίσιμο Card Chance
+        let cardHTML = insect.cardChance ? `<div style="margin-top: 5px; font-size: 0.8rem; color: #ffd54f;">🎴 Bestiary Card: ${insect.cardChance} chance on death</div>` : '';
+
         card.innerHTML = `
+            <img src="${insect.sprite || 'assets/sprites/placeholder.png'}" alt="${insect.name}" onerror="this.src='assets/sprites/placeholder.png'" class="item-sprite">
             <div class="item-info">
                 <h3>${insect.name} <span style="font-size: 0.8rem; color: ${catColor};">(${insect.category})</span></h3>
-                <p class="materials"><strong>Drops:</strong> ${insect.drops.join(', ')}</p>
+                ${dropsHTML}
+                ${rareDropsHTML}
+                ${cardHTML}
             </div>
             <div class="actions">
                 <label>
