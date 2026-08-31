@@ -112,4 +112,4 @@ const allGroundedInsects = [
   { name: "Sunny", category: "Named", drops: ["Sunny Scale", "Tough Gunk"] }
 ];
 
-export default allGroundedInsects;
+
