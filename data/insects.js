@@ -177,7 +177,7 @@ const allGroundedInsects = [
   { 
     name: "Red Soldier Ant", 
     category: "Hostile", 
-    sprite: "assets/sprites/insects/Red_Soldier_Ant.png",
+    sprite: "assets/sprites/insects/Red_Soldier_AntG2.png",
     drops: [{ item: "Acid Gland", amount: "1" }, { item: "Red Ant Head", amount: "1" }, { item: "Red Ant Mandibles", amount: "1" }, { item: "Red Ant Part", amount: "1" }],
     rareDrops: [],
     cardChance: "1%" 
