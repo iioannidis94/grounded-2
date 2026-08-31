@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-<!-- Στο <head> πρόσθεσε το αρχείο με τα έντομα -->
-<script src="data/insects.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grounded 2 - Companion Tracker</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>">
 
-<!-- 1. Μέσα στο <div class="grid-container main-categories"> πρόσθεσε αυτό: -->
-<div id="nav-insects" class="category-card" onclick="showView('insects-list-view'); renderInsects();">
-    <h3>🪲 Insects & Drops</h3>
-    <p>Βρες τι σου λείπει & τι πετάνε</p>
-</div>
+    <!-- Φόρτωση Δεδομένων -->
+    <script src="data/weapons.js" defer></script>
+    <script src="data/armor.js" defer></script>
+    <script src="data/omni_tools.js" defer></script>
+    <script src="data/insects.js" defer></script> <!-- Το αρχείο των εντόμων -->
 
-<!-- 2. Μέσα στο <main>, κάτω από τα άλλα views, πρόσθεσε αυτό το νέο view: -->
-<div id="insects-list-view" class="view" style="display: none;">
-    <button class="back-to-dashboard" onclick="showView('dashboard-view')">← Πίσω στην Αρχική</button>
-    <h2>🪲 Λίστα Εντόμων</h2>
-    <div id="insects-items-container" class="items-list-container"></div>
-</div>
-    
+    <!-- Φόρτωση Λογικής -->
+    <script src="js/main.js" defer></script>
 </head>
 <body>
     <header>
@@ -44,6 +42,11 @@
                 <div id="nav-areas" class="category-card">
                     <h3>🗺️ Areas</h3>
                     <p>Biomes & Interactive Map</p>
+                </div>
+                <!-- ΝΕΟ: Η κάρτα για τα έντομα -->
+                <div id="nav-insects" class="category-card">
+                    <h3>🪲 Insects & Drops</h3>
+                    <p>Βρες τι σου λείπει & τι πετάνε</p>
                 </div>
             </div>
 
@@ -103,6 +106,14 @@
                 <iframe src="https://metaforge.app/grounded-2/map/main" width="100%" height="100%" style="border: none; border-radius: 8px;"></iframe>
             </div>
         </div>
+
+        <!-- VIEW 9: INSECTS (ΝΕΟ VIEW) -->
+        <div id="insects-list-view" class="view" style="display: none;">
+            <button class="back-to-dashboard">← Πίσω στην Αρχική</button>
+            <h2>🪲 Λίστα Εντόμων</h2>
+            <div id="insects-items-container" class="items-list-container"></div>
+        </div>
+
     </main>
 </body>
 </html>
