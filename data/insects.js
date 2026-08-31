@@ -457,7 +457,7 @@ const allGroundedInsects = [
   { 
     name: "Striped Bark Scorpion", 
     category: "Hostile", 
-    sprite: "assets/sprites/insects/Striped_Bark_Scorpion.png",
+    sprite: "assets/sprites/insects/Striped_Bark_Scorpion_Jr..png",
     drops: [{ item: "Scorpion Venom", amount: "1" }, { item: "Stabby Stinger", amount: "1" }, { item: "Striped Scorpion Chunk", amount: "1" }, { item: "Striped Scorpion Pincer", amount: "1" }, { item: "Striped Scorpion Stinger", amount: "1" }],
     rareDrops: [],
     cardChance: "1%" 
