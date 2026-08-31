@@ -2,11 +2,12 @@
 let userProgress = JSON.parse(localStorage.getItem('g2_progress'));
 
 if (!userProgress || typeof userProgress !== 'object') {
-    userProgress = { ownedItems: {}, wishlist: {}, gatheredMaterials: {} };
+    userProgress = { ownedItems: {}, wishlist: {}, gatheredMaterials: {}, completedInsects: {} };
 } else {
     if (!userProgress.ownedItems) userProgress.ownedItems = {};
     if (!userProgress.wishlist) userProgress.wishlist = {};
     if (!userProgress.gatheredMaterials) userProgress.gatheredMaterials = {};
+    if (!userProgress.completedInsects) userProgress.completedInsects = {}; // ΝΕΟ: Για τα έντομα
 }
 
 function saveProgress() {
@@ -32,6 +33,8 @@ function showView(viewId, categoryFilter = null, pushState = true) {
         renderToolsSubcategories();
     } else if (viewId === 'tools-list-view' && categoryFilter) {
         renderToolsList(categoryFilter);
+    } else if (viewId === 'insects-list-view') {
+        renderInsects(); // ΝΕΟ: Φόρτωση εντόμων
     } else if (viewId === 'dashboard-view') {
         renderDashboard();
     }
@@ -44,7 +47,6 @@ function showView(viewId, categoryFilter = null, pushState = true) {
     }
 }
 
-
 // Ακρόαση για τα κουμπιά Μπρος / Πίσω του ποντικιού / browser
 window.addEventListener('popstate', (event) => {
     if (event.state && event.state.viewId) {
@@ -53,7 +55,6 @@ window.addEventListener('popstate', (event) => {
         showView('dashboard-view', null, false);
     }
 });
-
 
 // 1. Dashboard: Κεντρική σελίδα & Wishlist Tracker (Weapons, Armors, Tools)
 function renderDashboard() {
@@ -352,7 +353,53 @@ function renderToolsList(categoryType) {
     });
 }
 
-// Αρχικοποίηση εφαρμογής κατά το φόρτωση
+// 8. Λίστα Εντόμων (ΝΕΟ)
+function renderInsects() {
+    const container = document.getElementById('insects-items-container');
+    if (!container) return;
+    container.innerHTML = ''; 
+
+    if (typeof allGroundedInsects === 'undefined' || !Array.isArray(allGroundedInsects)) {
+        container.innerHTML = '<p class="empty-msg">Τα δεδομένα των εντόμων δεν βρέθηκαν. Σιγουρέψου ότι φορτώνεις το insects.js στο HTML σου!</p>';
+        return;
+    }
+
+    allGroundedInsects.forEach((insect) => {
+        // Ελέγχουμε αν το έχουμε σώσει (από το κοινό g2_progress)
+        const isCompleted = userProgress.completedInsects[insect.name] || false;
+        
+        const card = document.createElement('div');
+        card.className = `item-card ${isCompleted ? 'completed' : ''}`;
+        
+        // Χρωματίζουμε το όνομα της κατηγορίας ανάλογα με την επικινδυνότητα
+        let catColor = '#81c784'; // Default (Neutral/Harmless)
+        if (insect.category === 'Hostile' || insect.category === 'O.R.C.' || insect.category === 'O.G.R.R.') catColor = '#e57373';
+        if (insect.category === 'Named') catColor = '#ffb74d';
+
+        card.innerHTML = `
+            <div class="item-info">
+                <h3>${insect.name} <span style="font-size: 0.8rem; color: ${catColor};">(${insect.category})</span></h3>
+                <p class="materials"><strong>Drops:</strong> ${insect.drops.join(', ')}</p>
+            </div>
+            <div class="actions">
+                <label>
+                    <input type="checkbox" class="insect-chk" ${isCompleted ? 'checked' : ''}>
+                    Το βρήκα
+                </label>
+            </div>
+        `;
+
+        card.querySelector('.insect-chk').addEventListener('change', (e) => {
+            userProgress.completedInsects[insect.name] = e.target.checked;
+            e.target.checked ? card.classList.add('completed') : card.classList.remove('completed');
+            saveProgress();
+        });
+
+        container.appendChild(card);
+    });
+}
+
+// Αρχικοποίηση εφαρμογής κατά τη φόρτωση
 document.addEventListener('DOMContentLoaded', () => {
     const navWeapons = document.getElementById('nav-weapons');
     if (navWeapons) navWeapons.addEventListener('click', () => showView('weapons-subcategories-view'));
@@ -365,6 +412,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const navAreas = document.getElementById('nav-areas');
     if (navAreas) navAreas.addEventListener('click', () => showView('map-view'));
+
+    // ΝΕΟ: Προσθήκη Event Listener για την κάρτα των εντόμων στο Dashboard
+    const navInsects = document.getElementById('nav-insects');
+    if (navInsects) navInsects.addEventListener('click', () => showView('insects-list-view'));
     
     document.querySelectorAll('.back-to-dashboard').forEach(btn => {
         btn.addEventListener('click', () => showView('dashboard-view'));
@@ -385,6 +436,8 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (hash.startsWith('tools-list-')) {
             const cat = decodeURIComponent(hash.replace('tools-list-', ''));
             showView('tools-list-view', cat, false);
+        } else if (hash === 'insects-list-view') {
+            showView('insects-list-view', null, false);
         } else if (hash && document.getElementById(hash)) {
             showView(hash, null, false);
         } else {
